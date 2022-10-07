@@ -28,4 +28,5 @@ func (user *User) Validate() *errors.RestErr {
 	if user.Password == "" {
 		return errors.NewBadRequestError()
 	}
+	return nil
 }

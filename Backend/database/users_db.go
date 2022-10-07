@@ -18,17 +18,17 @@ var (
 
 func init() {
 
-	databaseName := fmt.Sprintf(("%s:%s@tcp(%s)/%s?charset=utf8", username, password, host, schema))
+	databaseName := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", username, password, host, schema)
 
 	var err error
 	Client, err = sql.Open("mysql", databaseName)
-if err != nil {
-	panic(err)
-}
+	if err != nil {
+		panic(err)
+	}
 
-if err := Client.Ping(); err != nil {
-	panic(err)
-}
+	if err := Client.Ping(); err != nil {
+		panic(err)
+	}
 
-log.Println("database sucess")
+	log.Println("database sucess")
 }

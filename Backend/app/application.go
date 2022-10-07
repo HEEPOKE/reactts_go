@@ -1,7 +1,8 @@
 package app
 
 import (
-	// "../routes/"
+	// "./routes/"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,6 +11,6 @@ var (
 )
 
 func StartApplication() {
-	router.mapUrls()
+	mapUrls()
 	router.Run(":8081")
 }

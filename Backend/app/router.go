@@ -20,7 +20,7 @@ func mapUrls() {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	router.POST("/api/register", users.REgister)
+	router.POST("/api/register", users.Register)
 	router.POST("/api/login", users.Login)
 	router.GET("/api/user", users.GET)
 	router.GET("/api/logout", users.Logout)

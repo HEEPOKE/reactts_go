@@ -22,7 +22,7 @@ func (user *User) Validate() *errors.RestErr {
 	user.Tel = strings.TrimSpace(user.Tel)
 
 	if user.Email == "" {
-		return errors.NewBadRequestError("กรุณาอีเมล์")
+		return errors.NewBadRequestError("กรุณากรอกอีเมล์")
 	}
 
 	if user.Password == "" {

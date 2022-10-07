@@ -3,7 +3,8 @@ package services
 import (
 	"os/user"
 
-	"../domain/users/"
+	"../../domain/users/"
+
 	"../utils/errors/"
 	"golang.org/x/crypto/bcrypt"
 )

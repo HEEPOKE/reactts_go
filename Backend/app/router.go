@@ -3,7 +3,8 @@ package app
 import (
 	"time"
 
-	"../controllers/users/"
+	"Api/Backend/controllers/users/"
+
 	"github.com/gin-contrib/cors"
 )
 

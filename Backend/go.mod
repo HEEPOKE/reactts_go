@@ -1,4 +1,4 @@
-module Backend/Api
+module Api/Backend
 
 go 1.19
 

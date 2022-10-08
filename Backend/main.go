@@ -1,7 +1,7 @@
 package main
 
 // import "./app/"
-import "Backend/Api/app"
+import "Api/Backend/app"
 
 func main() {
 	app.StartApplication()

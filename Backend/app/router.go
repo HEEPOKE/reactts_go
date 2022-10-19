@@ -3,8 +3,6 @@ package app
 import (
 	"time"
 
-	"Api/Backend/controllers/users/"
-
 	"github.com/gin-contrib/cors"
 )
 
@@ -21,8 +19,8 @@ func mapUrls() {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	router.POST("/api/register", users.Register)
-	router.POST("/api/login", users.Login)
-	router.GET("/api/user", users.GET)
-	router.GET("/api/logout", users.Logout)
+	router.POST("/api/register", controllers.Register)
+	router.POST("/api/login", controllers.Login)
+	router.GET("/api/user", controllers.GET)
+	router.GET("/api/logout", controllers.Logout)
 }

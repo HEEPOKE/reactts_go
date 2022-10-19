@@ -3,7 +3,8 @@ package users
 import (
 	"fmt"
 
-	"../../database/"
+	"Api/Backend/database/"
+
 	"../../utils/errors/"
 )
 

@@ -8,12 +8,11 @@ import (
 
 type User struct {
 	gorm.Model
-	ID        uint
 	Name      string
 	Firstname string
 	Lastname  string
 	Age       uint
-	CreatedAt time.Time
+	CreatedAt time
 	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt
+	DeletedAt gorm.Dele
 }

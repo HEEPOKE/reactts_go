@@ -6,12 +6,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type Product struct {
+type User struct {
 	gorm.Model
+	ID        uint
 	Name      string
-	Category  string
-	Color     string
-	Price     uint
+	Firstname string
+	Lastname  string
+	Age       uint
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt

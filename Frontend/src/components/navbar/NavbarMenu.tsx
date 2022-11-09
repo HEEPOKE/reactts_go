@@ -19,7 +19,9 @@ export default function NavbarMenu() {
               <Nav.Link>Product</Nav.Link>
             </LinkContainer>
             <NavDropdown title="Manage" id="collasible-nav-dropdown">
-              <NavDropdown.Item>Action</NavDropdown.Item>
+              <LinkContainer to="/create">
+                <NavDropdown.Item>Create</NavDropdown.Item>
+              </LinkContainer>
               <NavDropdown.Item>Another action</NavDropdown.Item>
               <NavDropdown.Item>Something</NavDropdown.Item>
               <NavDropdown.Divider />
@@ -27,8 +29,12 @@ export default function NavbarMenu() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link>More deets</Nav.Link>
-            <Nav.Link>Dank memes</Nav.Link>
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/login">
+              <Nav.Link>Register</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>

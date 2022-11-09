@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
+import NavbarMenu from "../components/navbar/NavbarMenu";
 
 export default function () {
   return (
-    <div></div>
-  )
+    <>
+      <NavbarMenu />
+      {"home"}
+    </>
+  );
 }

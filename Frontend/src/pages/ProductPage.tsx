@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
+import NavbarMenu from "../components/navbar/NavbarMenu";
 
 export default function ProductPage() {
   return (
-    <div>ProductPage</div>
-  )
+    <div>
+      <NavbarMenu />
+      ProductPage
+    </div>
+  );
 }

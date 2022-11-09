@@ -19,7 +19,7 @@ export default function NavbarMenu() {
               <Nav.Link>Product</Nav.Link>
             </LinkContainer>
             <NavDropdown title="Manage" id="collasible-nav-dropdown">
-              <LinkContainer to="/create">
+              <LinkContainer to="/createproduct">
                 <NavDropdown.Item>Create</NavDropdown.Item>
               </LinkContainer>
               <NavDropdown.Item>Another action</NavDropdown.Item>
@@ -32,7 +32,7 @@ export default function NavbarMenu() {
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login">
+            <LinkContainer to="/register">
               <Nav.Link>Register</Nav.Link>
             </LinkContainer>
           </Nav>

@@ -1,15 +1,18 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"Backend/api/config"
+	"Backend/api/routes"
+	"fmt"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	r := gin.Default()
-	r.GET("/product", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+	config.Database()
+	routes.Router()
 }

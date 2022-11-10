@@ -11,7 +11,7 @@ func Router() {
 	r := gin.Default()
 	r.Use(cors.Default())
 	// product
-	product := r.Group("/product")
+	product := r.Group("/api/product")
 	{
 		product.GET("/get", ProductController.ReadProduct)
 		product.POST("/create", ProductController.Create)

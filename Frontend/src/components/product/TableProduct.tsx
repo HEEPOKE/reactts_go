@@ -1,11 +1,9 @@
 import React from "react";
 import { Container, Table, Button } from "react-bootstrap";
-import CreateButton from "./CreateButton";
 
 export default function TableProduct() {
   return (
     <Container className="mt-2">
-      <CreateButton />
       <Table
         striped
         bordered

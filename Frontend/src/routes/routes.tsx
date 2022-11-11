@@ -6,10 +6,11 @@ const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/auth/RegisterPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
 const CreateProductPage = lazy(() => import("../pages/CreateProductPage"));
+const LoadingPage = lazy(() => import("../pages/LoadingPage"));
 
 export default function AppRouter() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingPage />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export default function LoadingPage() {
   return (
-    <div>LoadingPage</div>
-  )
+    <div className="ring">
+      Loading
+      <span></span>
+    </div>
+  );
 }

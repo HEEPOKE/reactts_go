@@ -4,7 +4,7 @@ export default function LoadingPage() {
   return (
     <div className="ring">
       Loading
-      <span></span>
+      <span className="span"></span>
     </div>
   );
 }

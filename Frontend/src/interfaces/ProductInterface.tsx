@@ -1,4 +1,4 @@
-export default interface productProps {
+export default interface ProductInterface {
   id: number;
   name: string;
   color: string;

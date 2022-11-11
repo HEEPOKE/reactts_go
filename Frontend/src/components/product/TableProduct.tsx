@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button } from "react-bootstrap";
-import productProps from "../../interfaces/ProductInterface";
+import axios from "axios";
+import ProductInterface from "../../interfaces/ProductInterface";
 
 export default function TableProduct() {
-  const [product, setProduct] = useState<productProps[]>([]);
+  const server = axios.create({
+    baseURL: "0.0.0.0:8080/ping/api/product/get",
+  });
+
+  const [product, setProduct] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
-    const api = async () => {
-      const data = await fetch("127.0.0.1:8080/api/product/get", {
-        method: "GET",
+    axios
+      .get("127.0.0.1:8080/api/product/get")
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
       });
-      const jsonData = await data.json();
-      setProduct(jsonData.results);
-    };
-
-    api();
   }, []);
 
   return (

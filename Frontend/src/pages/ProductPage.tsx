@@ -13,7 +13,7 @@ export default function ProductPage() {
       <Container className="justify-center">
         <Card>
           <Card.Header className="bg-primary text-white">
-            List Product
+            <h4 className="mt-2">List Product</h4>
           </Card.Header>
           <Card.Body>
             <Container fluid>

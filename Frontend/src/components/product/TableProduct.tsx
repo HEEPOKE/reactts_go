@@ -5,7 +5,7 @@ import ProductInterface from "../../interfaces/ProductInterface";
 
 export default function TableProduct() {
   const server = axios.create({
-    baseURL: "0.0.0.0:8080/ping/api/product/get",
+    baseURL: "0.0.0.0:8080/api/product/get",
   });
 
   const [product, setProduct] = useState<ProductInterface[]>([]);

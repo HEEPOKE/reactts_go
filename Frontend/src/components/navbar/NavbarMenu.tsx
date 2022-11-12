@@ -18,8 +18,8 @@ export default function NavbarMenu() {
             <LinkContainer to="/product">
               <Nav.Link>Product</Nav.Link>
             </LinkContainer>
-            <NavDropdown title="Manage" id="collasible-nav-dropdown">
-              <LinkContainer to="/createproduct">
+            <NavDropdown title="Manage" id="nav-dropdown">
+              <LinkContainer to="/create-product">
                 <NavDropdown.Item>Create</NavDropdown.Item>
               </LinkContainer>
               <NavDropdown.Item>Another action</NavDropdown.Item>

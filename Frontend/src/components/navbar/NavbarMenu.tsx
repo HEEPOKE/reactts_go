@@ -29,10 +29,10 @@ export default function NavbarMenu() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <LinkContainer to="/login">
+            <LinkContainer to="/auth/login">
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/register">
+            <LinkContainer to="/auth/register">
               <Nav.Link>Register</Nav.Link>
             </LinkContainer>
           </Nav>

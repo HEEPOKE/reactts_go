@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
-import App from "./App";
+import AppRouter from "./routes/routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/loading.css";
+import "./assets/css/Auth.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <AppRouter />
   </React.StrictMode>
 );

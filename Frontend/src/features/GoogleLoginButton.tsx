@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { gapi } from "gapi-script";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import { refreshTokenSetup } from "../utils/refreshToken";
 
 export default function GoogleLoginButton() {
   const [profileData, setProfileData] = useState(

@@ -10,6 +10,7 @@ import (
 func Router() {
 	r := gin.Default()
 	r.Use(cors.Default())
+
 	// product
 	product := r.Group("/api/product")
 	{
@@ -18,5 +19,5 @@ func Router() {
 		product.PUT("/edit/:id", ProductController.Edit)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
-	r.Run()
+	r.Run(":8080")
 }

@@ -5,16 +5,16 @@ import (
 	"net/http"
 )
 
-func NewInternalServerError(message string) *models.Error {
-	return &models.Error{
+func NewInternalServerError(message string) *models.RestErr {
+	return &models.RestErr{
 		Message: message,
 		Status:  http.StatusInternalServerError,
 		Error:   "internal_server_error",
 	}
 }
 
-func NewBadRequestError(message string) *models.Error {
-	return &models.Error{
+func NewBadRequestError(message string) *models.RestErr {
+	return &models.RestErr{
 		Message: message,
 		Status:  http.StatusBadRequest,
 		Error:   "bad_request",

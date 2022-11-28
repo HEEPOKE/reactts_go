@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Error struct {
+type RestErr struct {
 	gorm.Model
 	Message string `json:"message"`
 	Status  int    `json:"status"`

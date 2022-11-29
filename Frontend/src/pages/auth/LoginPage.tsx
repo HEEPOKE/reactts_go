@@ -47,14 +47,14 @@ export default function LoginPage() {
               </Form.Group>
               <Button
                 type="submit"
-                className="btn-lg mt-2 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+                className="btn-lg mt-2 col-12"
                 variant="primary"
               >
                 Login
               </Button>
             </Form>
             <Button
-              className="btn-lg mt-2 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+              className="btn-lg mt-2 col-12"
               variant="secondary"
               onClick={Back}
             >

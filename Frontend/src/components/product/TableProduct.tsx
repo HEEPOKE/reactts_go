@@ -9,7 +9,7 @@ export default function TableProduct() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/product/get")
+      .get("127.0.0.1:8080/api/product/get")
       .then((res) => {
         setProduct(res.data);
       })

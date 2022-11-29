@@ -1,6 +1,7 @@
 package routes
 
 import (
+	AuthController "Backend/api/controllers/auth"
 	ProductController "Backend/api/controllers/product"
 	"os"
 	"time"
@@ -26,8 +27,8 @@ func Router() {
 	//auth
 	auth := r.Group("/api/auth")
 	{
-		auth.GET("/login", ProductController.ReadProduct)
-		auth.POST("/register", ProductController.Create)
+		auth.GET("/login", AuthController.Login)
+		auth.POST("/register", AuthController.Register)
 	}
 
 	// product

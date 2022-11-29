@@ -1,124 +1,93 @@
 package auth
 
 import (
+	"Backend/api/config"
 	"Backend/api/models"
-	"strconv"
+	"fmt"
+	"net/http"
+	"os"
 	"time"
 
-	"github.com/gofiber/fiber"
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
 const SecretKey = "secret"
 
-func Register(c *fiber.Ctx) error {
-	var data map[string]string
+var hmacSampleSecret []byte
 
-	if err := c.BodyParser(&data); err != nil {
-		return err
+func Register(c *gin.Context) {
+	var json models.User
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
-
-	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
-
-	user := models.User{
-		Name:     data["name"],
-		Email:    data["email"],
-		Password: password,
+	var userExist models.User
+	config.DB.Where("username = ?", json.Username).First(&userExist)
+	if userExist.ID > 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "user Exist",
+			"status":  "error",
+		})
+		return
 	}
-
-	database.DB.Create(&user)
-
-	return c.JSON(user)
+	encryptedPassword, _ := bcrypt.GenerateFromPassword([]byte(json.Password), 10)
+	user := models.User{Username: json.Username, Password: string(encryptedPassword), Email: json.Email}
+	config.DB.Create(&user)
+	if user.ID > 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"userId":  user.ID,
+			"status":  "ok",
+			"message": "success",
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "error",
+			"message": "fail",
+		})
+	}
 }
 
-func Login(c *fiber.Ctx) error {
-	var data map[string]string
-
-	if err := c.BodyParser(&data); err != nil {
-		return err
+func Login(c *gin.Context) {
+	var json models.User
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
-
-	var user models.User
-
-	database.DB.Where("email = ?", data["email"]).First(&user)
-
-	if user.Id == 0 {
-		c.Status(fiber.StatusNotFound)
-		return c.JSON(fiber.Map{
-			"message": "user not found",
+	var userExist models.User
+	config.DB.Where("username = ?", json.Username).First(&userExist)
+	if userExist.ID == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "error",
+			"message": "user Does Not Exist",
 		})
+		return
 	}
-
-	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
-		c.Status(fiber.StatusBadRequest)
-		return c.JSON(fiber.Map{
-			"message": "incorrect password",
+	err := bcrypt.CompareHashAndPassword([]byte(userExist.Password), []byte(json.Password))
+	if err == nil {
+		hmacSampleSecret = []byte(os.Getenv("JWT_SECRET_KEY"))
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"userId": userExist.ID,
+			"exp":    time.Now().Add(time.Minute * 1).Unix(),
 		})
-	}
-
-	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(user.Id)),
-		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), //1 day
-	})
-
-	token, err := claims.SignedString([]byte(SecretKey))
-
-	if err != nil {
-		c.Status(fiber.StatusInternalServerError)
-		return c.JSON(fiber.Map{
-			"message": "could not login",
+		tokenString, err := token.SignedString(hmacSampleSecret)
+		fmt.Println(tokenString, err)
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "ok",
+			"message": "Login Success",
+			"token":   tokenString,
 		})
+		return
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status":  "error",
+			"message": "Login Failed",
+		})
+		return
 	}
-
-	cookie := fiber.Cookie{
-		Name:     "jwt",
-		Value:    token,
-		Expires:  time.Now().Add(time.Hour * 24),
-		HTTPOnly: true,
-	}
-
-	c.Cookie(&cookie)
-
-	return c.JSON(fiber.Map{
-		"message": "success",
-	})
 }
 
-func GetUser(c *fiber.Ctx) error {
-	cookie := c.Cookies("jwt")
+func Logout(c *gin.Context) error {
 
-	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(SecretKey), nil
-	})
-
-	if err != nil {
-		c.Status(fiber.StatusUnauthorized)
-		return c.JSON(fiber.Map{
-			"message": "unauthenticated",
-		})
-	}
-
-	claims := token.Claims.(*jwt.StandardClaims)
-
-	var user models.User
-
-	database.DB.Where("id = ?", claims.Issuer).First(&user)
-
-	return c.JSON(user)
-}
-
-func Logout(c *fiber.Ctx) error {
-	cookie := fiber.Cookie{
-		Name:     "jwt",
-		Value:    "",
-		Expires:  time.Now().Add(-time.Hour),
-		HTTPOnly: true,
-	}
-
-	c.Cookie(&cookie)
-
-	return c.JSON(fiber.Map{
-		"message": "success",
-	})
 }

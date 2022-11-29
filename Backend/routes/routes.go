@@ -3,6 +3,8 @@ package routes
 import (
 	AuthController "Backend/api/controllers/auth"
 	ProductController "Backend/api/controllers/product"
+	UserController "Backend/api/controllers/user"
+	"Backend/api/middleware"
 	"os"
 	"time"
 
@@ -24,14 +26,19 @@ func Router() {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	//auth
 	auth := r.Group("/api/auth")
 	{
 		auth.GET("/login", AuthController.Login)
 		auth.POST("/register", AuthController.Register)
 	}
 
-	// product
+	authorized := r.Group("/api/users", middleware.ValidationUsers())
+	{
+		authorized.GET("/get", UserController.GetUser)
+		authorized.GET("/get/:id", UserController.GetUserById)
+		authorized.GET("/profile", UserController.Profile)
+	}
+
 	product := r.Group("/api/product")
 	{
 		product.GET("/get", ProductController.ReadProduct)
@@ -39,5 +46,6 @@ func Router() {
 		product.PUT("/edit/:id", ProductController.Edit)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
+
 	r.Run(":8080")
 }

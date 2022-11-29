@@ -12,7 +12,7 @@ import (
 type User struct {
 	gorm.Model
 	Id       int64  `json:"id"`
-	Name     string `json:"name"`
+	Username string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Tel      string `json:"tel"`
@@ -20,7 +20,7 @@ type User struct {
 }
 
 func (user *User) Validate() *models.RestErr {
-	user.Name = strings.TrimSpace(user.Name)
+	user.Username = strings.TrimSpace(user.Username)
 	user.Email = strings.TrimSpace(user.Email)
 	if user.Email == "" {
 		return errors.NewBadRequestError("invalid email address")

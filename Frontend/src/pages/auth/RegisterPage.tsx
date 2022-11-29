@@ -12,6 +12,17 @@ export default function RegisterPage() {
     });
   };
 
+  axios({
+    method: "post",
+    url: "http://localhost:8080/api/auth/register",
+    data: {
+      username: "Fred",
+      password: "Flintstone",
+    },
+  }).then(function (response) {
+    response.data;
+  });
+
   const Back = () => {
     window.history.back();
   };

@@ -1,7 +1,17 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
+import axios from "axios";
 
 export default function RegisterPage() {
+  const Base = () => {
+    axios.create({
+      baseURL: "http://localhost:8080/api/auth",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  };
+
   const Back = () => {
     window.history.back();
   };

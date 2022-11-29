@@ -1,5 +1,5 @@
 export default interface ProductInterface {
-  id: number;
+  id?: any | null;
   name: string;
   color: string;
   category: string;

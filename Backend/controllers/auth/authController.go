@@ -88,6 +88,9 @@ func Login(c *gin.Context) {
 	}
 }
 
-func Logout(c *gin.Context) error {
-
+func Logout(c *gin.Context) {
+	c.SetCookie("jwt", "", -1, "", "", false, true)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "success",
+	})
 }

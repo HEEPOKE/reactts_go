@@ -30,6 +30,7 @@ func Router() {
 	{
 		auth.GET("/login", AuthController.Login)
 		auth.POST("/register", AuthController.Register)
+		auth.GET("/logout", AuthController.Logout)
 	}
 
 	authorized := r.Group("/api/users", middleware.ValidationUsers())

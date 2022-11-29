@@ -12,7 +12,7 @@ var DB *gorm.DB
 var err error
 
 func Database() {
-	dsn := os.Getenv("DB_USER") + ":@tcp(" + os.Getenv("HOST") + ")/Shirtgo?charset=utf8&parseTime=True&loc=Local"
+	dsn := os.Getenv("DB_USER") + ":@tcp(" + os.Getenv("HOST") + ")/" + os.Getenv("DB_NAME") + "?charset=utf8&parseTime=True&loc=Local"
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")

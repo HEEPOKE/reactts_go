@@ -47,5 +47,5 @@ func Router() {
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
 
-	r.Run(":8080")
+	r.Run("localhost:8080")
 }

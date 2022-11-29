@@ -25,7 +25,7 @@ func Register(c *gin.Context) {
 	}
 	var userExist models.User
 	config.DB.Where("username = ?", json.Username).First(&userExist)
-	if userExist.Id > 0 {
+	if userExist.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "user Exist",
 			"status":  "error",
@@ -33,9 +33,15 @@ func Register(c *gin.Context) {
 		return
 	}
 	encryptedPassword, _ := bcrypt.GenerateFromPassword([]byte(json.Password), 10)
-	user := models.User{Username: json.Username, Password: string(encryptedPassword), Email: json.Email}
+	user := models.User{
+		Username: json.Username,
+		Password: string(encryptedPassword),
+		Email:    json.Email,
+		Tel:      json.Tel,
+		Role:     json.Role,
+	}
 	config.DB.Create(&user)
-	if user.Id > 0 {
+	if user.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "ok",
 			"message": "success",

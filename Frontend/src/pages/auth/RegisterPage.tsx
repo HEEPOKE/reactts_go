@@ -27,12 +27,15 @@ export default class RegisterPage extends React.Component {
       tel: this.state.tel,
       role: 1,
     };
-    
+
     axios({
       method: "post",
-      url: "http://localhost:8080/api/auth/register",
+      url: "http://127.0.0.1:8080/api/auth/register",
       data: {
-        register,
+        register
+      },
+      headers: {
+        "Content-type": "application/json",
       },
     })
       .then(function (res: any) {
@@ -103,6 +106,7 @@ export default class RegisterPage extends React.Component {
                   <Form.Control
                     type="tel"
                     onChange={this.handleChange}
+                    maxLength={10}
                     placeholder="xxx-xxx-xxxx"
                   />
                 </Form.Group>

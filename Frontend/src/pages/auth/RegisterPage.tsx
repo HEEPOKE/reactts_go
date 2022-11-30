@@ -34,6 +34,8 @@ export default class RegisterPage extends React.Component {
         register,
       },
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
         "Content-type": "application/json",
       },
     })

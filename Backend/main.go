@@ -5,7 +5,6 @@ import (
 	"Backend/api/routes"
 	"fmt"
 
-	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -16,5 +15,5 @@ func main() {
 	}
 	config.Database()
 	routes.Router()
-	gin.SetMode(gin.ReleaseMode)
+	// gin.SetMode(gin.ReleaseMode)
 }

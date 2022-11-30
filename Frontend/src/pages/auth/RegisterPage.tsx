@@ -7,10 +7,9 @@ import AuthApi from "../../services/auth/AuthApiService";
 export default class RegisterPage extends React.Component {
   state = {
     username: "",
-    email: "",
     password: "",
+    email: "",
     tel: "",
-    role: "",
   };
 
   handleChange = (e: any) => {
@@ -25,14 +24,14 @@ export default class RegisterPage extends React.Component {
       email: this.state.email,
       password: this.state.password,
       tel: this.state.tel,
-      role: 1,
+      role: 0,
     };
 
     axios({
       method: "post",
-      url: "http://127.0.0.1:8080/api/auth/register",
+      url: "http://localhost:6476/api/auth/register",
       data: {
-        register
+        register,
       },
       headers: {
         "Content-type": "application/json",

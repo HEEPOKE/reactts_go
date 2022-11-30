@@ -35,18 +35,19 @@ func Router() {
 
 	authorized := r.Group("/api/users", middleware.ValidationUsers())
 	{
-		authorized.GET("/get", UserController.GetUser)
 		authorized.GET("/get/:id", UserController.GetUserById)
 		authorized.GET("/profile", UserController.Profile)
 	}
 
 	product := r.Group("/api/product")
 	{
-		product.GET("/get", ProductController.ReadProduct)
+		product.GET("/read", ProductController.ReadProduct)
 		product.POST("/create", ProductController.Create)
 		product.PUT("/edit/:id", ProductController.Edit)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
 
-	r.Run("localhost:8080")
+	r.GET("/api/read/users", UserController.GetUser)
+
+	r.Run("localhost:6476")
 }

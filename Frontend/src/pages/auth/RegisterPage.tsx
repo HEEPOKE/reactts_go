@@ -16,6 +16,7 @@ export default class RegisterPage extends React.Component {
     this.setState({ name: e.target.value });
   };
 
+
   handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -27,11 +28,13 @@ export default class RegisterPage extends React.Component {
       role: 0,
     };
 
+    const data = JSON.stringify(register);
+
     axios({
       method: "post",
       url: "http://localhost:6476/api/auth/register",
       data: {
-        register,
+        data,
       },
       headers: {
         "Access-Control-Allow-Origin": "*",

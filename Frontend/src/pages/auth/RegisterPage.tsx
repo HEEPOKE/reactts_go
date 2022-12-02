@@ -71,29 +71,35 @@ export default function RegisterPage() {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  onChange={handleInputChange}
+                  id="username"
                   value={register.username}
+                  onChange={handleInputChange}
                   placeholder="Enter Username"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  onChange={handleInputChange}
+                  id="email"
                   value={register.email}
+                  onChange={handleInputChange}
                   placeholder="Enter Email"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  onChange={handleInputChange}
+                  id="password"
                   value={register.password}
+                  onChange={handleInputChange}
                   minLength={8}
                   maxLength={20}
                   placeholder="Enter Password"
+                  required
                 />
               </Form.Group>
               {/* <Form.Group className="mb-3">
@@ -110,11 +116,13 @@ export default function RegisterPage() {
                 <Form.Label>Tel</Form.Label>
                 <Form.Control
                   type="tel"
-                  onChange={handleInputChange}
+                  id="tel"
                   value={register.tel}
+                  onChange={handleInputChange}
                   minLength={10}
                   maxLength={10}
                   placeholder="xxx-xxx-xxxx"
+                  required
                 />
               </Form.Group>
               <Button

@@ -1,12 +1,12 @@
 import { httpAuth } from "../../https/auth";
-import UserInterface from "../../interfaces/UserInterface";
+import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 
 const loginApi = () => {
-  return httpAuth.get<UserInterface>("/login");
+  return httpAuth.get<RegisterInterface>("/login");
 };
 
-const registerApi = (data: UserInterface) => {
-  return httpAuth.post<UserInterface>("/register", data);
+const registerApi = (data: RegisterInterface) => {
+  return httpAuth.post<RegisterInterface>("/register", data);
 };
 
 const AuthApiServices = {

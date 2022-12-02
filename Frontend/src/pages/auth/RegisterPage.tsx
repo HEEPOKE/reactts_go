@@ -14,6 +14,8 @@ export default function RegisterPage() {
   const [register, setRegister] = useState<RegisterInterface>(authState);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
   };

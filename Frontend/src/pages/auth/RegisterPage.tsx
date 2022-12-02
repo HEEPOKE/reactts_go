@@ -110,6 +110,7 @@ export default class RegisterPage extends React.Component {
                   <Form.Control
                     type="tel"
                     onChange={this.handleChange}
+                    minLength={10}
                     maxLength={10}
                     placeholder="xxx-xxx-xxxx"
                   />

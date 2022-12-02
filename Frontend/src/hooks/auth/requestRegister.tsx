@@ -3,7 +3,7 @@ import axios from "axios";
 import UserInterface from "../../interfaces/UserInterface";
 import { errorAuth } from "../../utils/auth/errorAuth";
 
-export const Register = async (
+export const requestRegister = async (
   username: string,
   email: string,
   password: string,

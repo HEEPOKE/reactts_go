@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
-import UserInterface from "../../interfaces/UserInterface";
+import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthApi from "../../services/auth/AuthApiService";
 
 export default class RegisterPage extends React.Component {
@@ -12,13 +12,10 @@ export default class RegisterPage extends React.Component {
   handleSubmit = (e: any) => {
     e.preventDefault();
 
-
     axios({
       method: "post",
       url: "http://localhost:6476/api/auth/register",
-      data: {
-
-      },
+      data: {},
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "*",
@@ -41,7 +38,7 @@ export default class RegisterPage extends React.Component {
       tel: "",
     };
 
-    const [register, setRegister] = useState<UserInterface>(authState);
+    const [register, setRegister] = useState<RegisterInterface>(authState);
 
     const Back = () => {
       window.history.back();

@@ -1,11 +1,6 @@
-export default interface UserInterface {
-    id?: any | null;
+export default interface LoginInterface {
     username: string;
     password: string;
-    email: string;
-    role: number;
-    successful: boolean,
-    message: string
-    accessToken: string,
+    // accessToken: string,
   }
   

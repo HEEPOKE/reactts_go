@@ -1,9 +1,9 @@
 import React from "react";
 
-export const errorAuth = (error: any) => {
-  if (error?.response?.data?.error) {
-    throw error.response.data.error;
+export const errorAuth = (err: any) => {
+  if (err?.response?.data?.err) {
+    throw err.response.data.err;
   }
-  throw error;
+  throw err;
 };
 

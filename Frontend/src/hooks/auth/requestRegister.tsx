@@ -1,6 +1,5 @@
-import React from "react";
 import axios from "axios";
-import UserInterface from "../../interfaces/UserInterface";
+import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import { errorAuth } from "../../utils/auth/errorAuth";
 
 export const requestRegister = async (
@@ -8,8 +7,8 @@ export const requestRegister = async (
   email: string,
   password: string,
   tel: string
-): Promise<UserInterface> => {
-  const data: UserInterface = await axios
+): Promise<RegisterInterface> => {
+  const data: RegisterInterface = await axios
     .post("http://localhost:6476/api/auth/register", {
       username,
       email,

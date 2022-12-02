@@ -4,125 +4,138 @@ import axios from "axios";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthApi from "../../services/auth/AuthApiService";
 
-export default class RegisterPage extends React.Component {
-  handleChange = (e: any) => {
-    this.setState({ name: e.target.value });
+export default function RegisterPage() {
+  const authState = {
+    username: "",
+    email: "",
+    password: "",
+    tel: "",
   };
 
-  handleSubmit = (e: any) => {
-    e.preventDefault();
+  const [register, setRegister] = useState<RegisterInterface>(authState);
 
-    axios({
-      method: "post",
-      url: "http://localhost:6476/api/auth/register",
-      data: {},
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Content-type": "application/json",
-      },
-    })
-      .then(function (res: any) {
-        res.data;
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setRegister({ ...register, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    var data = {
+      username: register.username,
+      email: register.email,
+      password: register.password,
+      tel: register.tel,
+    };
+
+    AuthApi.registerApi(data)
+      .then((res: any) => {
+        setRegister({
+          id: res.data.id,
+          username: res.data.username,
+          email: res.data.email,
+          password: res.data.password,
+          tel: res.data.tel,
+        });
+        console.log(res.data);
       })
-      .catch(function (err: any) {
+      .catch((err: any) => {
         console.log(err);
       });
   };
 
-  render() {
-    const authState = {
-      username: "",
-      email: "",
-      password: "",
-      tel: "",
-    };
+  const newRegister = () => {
+    setRegister(authState);
+  };
 
-    const [register, setRegister] = useState<RegisterInterface>(authState);
+  const Back = () => {
+    window.history.back();
+  };
 
-    const Back = () => {
-      window.history.back();
-    };
-
-    return (
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-md-9 col-lg-6 col-xl-5">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                className="img-fluid"
-                alt="Sample image"
-              />
+  return (
+    <section className="vh-100">
+      <div className="container-fluid h-custom">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-md-9 col-lg-6 col-xl-5">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+              className="img-fluid"
+              alt="Sample image"
+            />
+          </div>
+          <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-3">
+              <h4>Register</h4>
             </div>
-            <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-3">
-                <h4>Register</h4>
-              </div>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Group>
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="text"
-                    onChange={this.handleChange}
-                    placeholder="Enter Username"
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    onChange={this.handleChange}
-                    placeholder="Enter Email"
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    onChange={this.handleChange}
-                    minLength={8}
-                    placeholder="Enter Password"
-                  />
-                </Form.Group>
-                {/* <Form.Group className="mb-3">
+            <Form>
+              <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  onChange={handleInputChange}
+                  value={register.username}
+                  placeholder="Enter Username"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  onChange={handleInputChange}
+                  value={register.email}
+                  placeholder="Enter Email"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  onChange={handleInputChange}
+                  value={register.password}
+                  minLength={8}
+                  maxLength={20}
+                  placeholder="Enter Password"
+                />
+              </Form.Group>
+              {/* <Form.Group className="mb-3">
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
                     type="password"
-                    onChange={this.handleChange}
+                    onChange={handleInputChange}
+                    value={register.}
                     minLength={8}
                     placeholder="Confirm Password"
                   />
                 </Form.Group> */}
-                <Form.Group className="mb-3">
-                  <Form.Label>Tel</Form.Label>
-                  <Form.Control
-                    type="tel"
-                    onChange={this.handleChange}
-                    minLength={10}
-                    maxLength={10}
-                    placeholder="xxx-xxx-xxxx"
-                  />
-                </Form.Group>
-                <Button
-                  type="submit"
-                  className="btn-lg mt-2 col-12"
-                  variant="primary"
-                >
-                  Submit
-                </Button>
-              </Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Tel</Form.Label>
+                <Form.Control
+                  type="tel"
+                  onChange={handleInputChange}
+                  value={register.tel}
+                  minLength={10}
+                  maxLength={10}
+                  placeholder="xxx-xxx-xxxx"
+                />
+              </Form.Group>
               <Button
+                type="submit"
                 className="btn-lg mt-2 col-12"
-                variant="secondary"
-                onClick={Back}
+                variant="primary"
+                onClick={handleSubmit}
               >
-                Back
+                Submit
               </Button>
-            </div>
+            </Form>
+            <Button
+              className="btn-lg mt-2 col-12"
+              variant="secondary"
+              onClick={Back}
+            >
+              Back
+            </Button>
           </div>
         </div>
-      </section>
-    );
-  }
+      </div>
+    </section>
+  );
 }

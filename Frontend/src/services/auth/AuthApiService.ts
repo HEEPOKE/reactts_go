@@ -1,12 +1,17 @@
-import axios from "axios";
+import { httpAuth } from "../../https/auth";
+import UserInterface from "../../interfaces/UserInterface";
 
-const AuthApi = () => {
-  axios.create({
-    baseURL: "http://localhost:8080/api/auth",
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+const loginApi = () => {
+  return httpAuth.get<UserInterface>("/login");
 };
 
-export default AuthApi;
+const registerApi = (data: UserInterface) => {
+  return httpAuth.post<UserInterface>("/register", data);
+};
+
+const AuthApiServices = {
+  loginApi,
+  registerApi,
+};
+
+export default AuthApiServices;

@@ -6,4 +6,5 @@ export default interface UserInterface {
   role: number;
   successful: boolean,
   message: string
+  accessToken: string,
 }

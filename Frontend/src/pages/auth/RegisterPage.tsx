@@ -1,40 +1,23 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import UserInterface from "../../interfaces/UserInterface";
 import AuthApi from "../../services/auth/AuthApiService";
 
 export default class RegisterPage extends React.Component {
-  state = {
-    username: "",
-    password: "",
-    email: "",
-    tel: "",
-  };
-
   handleChange = (e: any) => {
     this.setState({ name: e.target.value });
   };
 
-
   handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const register = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      tel: this.state.tel,
-      role: 0,
-    };
-
-    const data = JSON.stringify(register);
 
     axios({
       method: "post",
       url: "http://localhost:6476/api/auth/register",
       data: {
-        data,
+
       },
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -51,6 +34,15 @@ export default class RegisterPage extends React.Component {
   };
 
   render() {
+    const authState = {
+      username: "",
+      email: "",
+      password: "",
+      tel: "",
+    };
+
+    const [register, setRegister] = useState<UserInterface>(authState);
+
     const Back = () => {
       window.history.back();
     };

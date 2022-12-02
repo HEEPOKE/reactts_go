@@ -1,8 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import { Button, Form } from "react-bootstrap";
-import axios from "axios";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
-import AuthApi from "../../services/auth/AuthApiService";
+import AuthApiServices from "../../services/auth/AuthApiService";
 
 export default function RegisterPage() {
   const authState = {
@@ -27,24 +26,9 @@ export default function RegisterPage() {
       tel: register.tel,
     };
 
-    AuthApi.registerApi(data)
-      .then((res: any) => {
-        setRegister({
-          id: res.data.id,
-          username: res.data.username,
-          email: res.data.email,
-          password: res.data.password,
-          tel: res.data.tel,
-        });
-        console.log(res.data);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  };
+    // const data = JSON.stringify(registerForm);
 
-  const newRegister = () => {
-    setRegister(authState);
+    AuthApiServices.registerApi(data);
   };
 
   const Back = () => {
@@ -67,12 +51,12 @@ export default function RegisterPage() {
               <h4>Register</h4>
             </div>
             <Form>
-              <Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
                   id="username"
-                  value={register.username}
+                  // value={register.username}
                   onChange={handleInputChange}
                   placeholder="Enter Username"
                   required
@@ -83,7 +67,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="email"
                   id="email"
-                  value={register.email}
+                  // value={register.email}
                   onChange={handleInputChange}
                   placeholder="Enter Email"
                   required
@@ -94,7 +78,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="password"
                   id="password"
-                  value={register.password}
+                  // value={register.password}
                   onChange={handleInputChange}
                   minLength={8}
                   maxLength={20}
@@ -117,7 +101,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="tel"
                   id="tel"
-                  value={register.tel}
+                  // value={register.tel}
                   onChange={handleInputChange}
                   minLength={10}
                   maxLength={10}

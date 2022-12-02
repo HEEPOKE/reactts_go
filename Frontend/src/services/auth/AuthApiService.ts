@@ -6,7 +6,10 @@ const loginApi = () => {
 };
 
 const registerApi = (data: RegisterInterface) => {
-  return httpAuth.post<RegisterInterface>("/register", data);
+  return httpAuth
+    .post<RegisterInterface>("/register", data)
+    .then((res: any) => res.data)
+    .catch((err: any) => console.log(err));
 };
 
 const AuthApiServices = {

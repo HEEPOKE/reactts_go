@@ -16,7 +16,8 @@ export const requestRegister = async (
       tel,
     })
     .then((res: any) => res.data)
-    .catch((err: any) => errorAuth(err));
+    .catch((err: any) => console.log(err));
+    // .catch((err: any) => errorAuth(err));
 
   return data;
 };

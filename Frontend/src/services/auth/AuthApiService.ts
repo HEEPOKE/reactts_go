@@ -2,12 +2,12 @@ import { httpAuth } from "../../https/auth";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 
 const loginApi = () => {
-  return httpAuth.get<RegisterInterface>("/login");
+  return httpAuth.get<RegisterInterface>("/api/auth/login");
 };
 
 const registerApi = (data: RegisterInterface) => {
   return httpAuth
-    .post<RegisterInterface>("/register", data)
+    .post<RegisterInterface>("/api/auth/register", data)
     .then((res: any) => res.data)
     .catch((err: any) => console.log(err));
 };

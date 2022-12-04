@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Form, Button, Card } from "react-bootstrap";
 import "../../assets/css/product/create.css";
 
@@ -8,19 +9,11 @@ export default function FormInput() {
       <Card className="mt-5">
         <Card.Body>
           <Row>
-            <div className="col-md-3">
-              <div className="contact-info">
-                <h2>Add</h2>
-                <h2>Products</h2>
-              </div>
-            </div>
-            <div className="col-md-9">
+            <div className="col-12">
               <div className="contact-form">
-                <Form.Group className="form-group">
-                  <Form.Label className="control-label col-sm-2">
-                    First Name:
-                  </Form.Label>
-                  <div className="col-sm-10">
+                <Form.Group className="mb-3">
+                  <Form.Label>Name:</Form.Label>
+                  <div className="col-12">
                     <input
                       type="text"
                       className="form-control"
@@ -28,11 +21,9 @@ export default function FormInput() {
                     />
                   </div>
                 </Form.Group>
-                <Form.Group className="form-group">
-                  <Form.Label className="control-label col-sm-2">
-                    Last Name:
-                  </Form.Label>
-                  <div className="col-sm-10">
+                <Form.Group className="mb-3">
+                  <Form.Label>Category:</Form.Label>
+                  <div className="col-12">
                     <input
                       type="text"
                       className="form-control"
@@ -40,11 +31,9 @@ export default function FormInput() {
                     />
                   </div>
                 </Form.Group>
-                <Form.Group className="form-group">
-                  <Form.Label className="control-label col-sm-2">
-                    Email:
-                  </Form.Label>
-                  <div className="col-sm-10">
+                <Form.Group className="mb-3">
+                  <Form.Label>Color:</Form.Label>
+                  <div className="col-12">
                     <input
                       type="email"
                       className="form-control"
@@ -54,12 +43,21 @@ export default function FormInput() {
                     />
                   </div>
                 </Form.Group>
-                <Form.Group className="form-group">
-                  <div className="col-sm-offset-2 col-sm-10">
-                    <Button type="submit" className="btn btn-default">
-                      Submit
+                <Form.Group className="mb-3">
+                  <Form.Label>Price:</Form.Label>
+                  <Form.Control type="number" min={0} placeholder="xx bath" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Row className="col-12 justify-content-center">
+                    <Button type="submit" className="btn col-4 mx-2">
+                      Add
                     </Button>
-                  </div>
+                    <LinkContainer to="/product">
+                      <Button className="col-4" variant="danger">
+                        Cancel
+                      </Button>
+                    </LinkContainer>
+                  </Row>
                 </Form.Group>
               </div>
             </div>

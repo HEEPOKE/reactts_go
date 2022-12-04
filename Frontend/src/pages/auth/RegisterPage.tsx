@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import { Button, Form } from "react-bootstrap";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthApiServices from "../../services/auth/AuthApiService";
+import axios from "axios";
 
 export default function RegisterPage() {
   const authState = {
@@ -27,8 +28,6 @@ export default function RegisterPage() {
       password: register.password,
       tel: register.tel,
     };
-
-    // const data = JSON.stringify(registerForm);
 
     AuthApiServices.registerApi(data);
   };

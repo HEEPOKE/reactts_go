@@ -8,8 +8,13 @@ const loginApi = () => {
 const registerApi = (data: RegisterInterface) => {
   return httpAuth
     .post<RegisterInterface>("/api/auth/register", data)
-    .then((res: any) => res.data)
-    .catch((err: any) => console.log(err));
+    .then((res: any) => {
+      location.href = "/";
+      console.log(res.data);
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
 };
 
 const AuthApiServices = {

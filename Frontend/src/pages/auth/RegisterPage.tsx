@@ -3,13 +3,27 @@ import { Button, Form } from "react-bootstrap";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthApiServices from "../../services/auth/AuthApiService";
 import axios from "axios";
+import TelForm from "../../components/auth/TelForm";
 
 export default function RegisterPage() {
+  const [validated, setValidated] = useState(false);
+
+  const Validation = (e: any) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   const authState = {
     username: "",
-    email: "",
     password: "",
+    email: "",
     tel: "",
+    roe: Number,
   };
 
   const [register, setRegister] = useState<RegisterInterface>(authState);
@@ -24,9 +38,10 @@ export default function RegisterPage() {
   const handleSubmit = () => {
     var data = {
       username: register.username,
-      email: register.email,
       password: register.password,
+      email: register.email,
       tel: register.tel,
+      role: 1,
     };
 
     AuthApiServices.registerApi(data);
@@ -51,34 +66,37 @@ export default function RegisterPage() {
             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-3">
               <h4>Register</h4>
             </div>
-            <Form>
+            <Form noValidate validated={validated} onSubmit={Validation}>
               <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  id="username"
                   // value={register.username}
                   onChange={handleInputChange}
                   placeholder="Enter Username"
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please Enter Username
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  id="email"
                   // value={register.email}
                   onChange={handleInputChange}
                   placeholder="Enter Email"
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please Enter Email
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  id="password"
                   // value={register.password}
                   onChange={handleInputChange}
                   minLength={8}
@@ -86,6 +104,9 @@ export default function RegisterPage() {
                   placeholder="Enter Password"
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please Enter Password
+                </Form.Control.Feedback>
               </Form.Group>
               {/* <Form.Group className="mb-3">
                   <Form.Label>Confirm Password</Form.Label>
@@ -101,7 +122,6 @@ export default function RegisterPage() {
                 <Form.Label>Tel</Form.Label>
                 <Form.Control
                   type="tel"
-                  id="tel"
                   // value={register.tel}
                   onChange={handleInputChange}
                   minLength={10}
@@ -109,12 +129,16 @@ export default function RegisterPage() {
                   placeholder="xxx-xxx-xxxx"
                   required
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please Enter Tel
+                </Form.Control.Feedback>
               </Form.Group>
+              <TelForm />
               <Button
-                type="submit"
                 className="btn-lg mt-2 col-12"
                 variant="primary"
                 onClick={handleSubmit}
+                // type="submit"
               >
                 Submit
               </Button>

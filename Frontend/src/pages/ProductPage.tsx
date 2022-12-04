@@ -1,9 +1,8 @@
-import React from "react";
-import { Card, Container } from "react-bootstrap";
+import { Card, Container, Table, Button } from "react-bootstrap";
 import NavbarMenu from "../components/navbar/NavbarMenu";
 import Header from "../components/product/Header";
 import CreateButton from "../components/product/CreateButton";
-import TableProduct from "../components/product/TableProduct";
+import DataProducts from "../components/product/DataProduct";
 
 export default function ProductPage() {
   return (
@@ -18,7 +17,7 @@ export default function ProductPage() {
           <Card.Body>
             <Container fluid>
               <CreateButton />
-              <TableProduct />
+              <DataProducts />
             </Container>
           </Card.Body>
         </Card>

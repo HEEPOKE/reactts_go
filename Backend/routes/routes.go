@@ -5,8 +5,6 @@ import (
 	ProductController "Backend/api/controllers/product"
 	UserController "Backend/api/controllers/user"
 	"Backend/api/middleware"
-	"os"
-	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -14,17 +12,18 @@ import (
 
 func Router() {
 	r := gin.Default()
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{os.Getenv("ENDPOINT_URL")},
-		AllowMethods:     []string{"GET", "POST"},
-		AllowHeaders:     []string{"Content-Type"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == os.Getenv("ENDPOINT_URL")
-		},
-		MaxAge: 12 * time.Hour,
-	}))
+	// r.Use(cors.New(cors.Config{
+	// 	AllowOrigins:     []string{os.Getenv("ENDPOINT_URL")},
+	// 	AllowMethods:     []string{"GET", "POST"},
+	// 	AllowHeaders:     []string{"Content-Type"},
+	// 	ExposeHeaders:    []string{"Content-Length"},
+	// 	AllowCredentials: true,
+	// 	AllowOriginFunc: func(origin string) bool {
+	// 		return origin == os.Getenv("ENDPOINT_URL")
+	// 	},
+	// 	MaxAge: 12 * time.Hour,
+	// }))
+	r.Use(cors.Default())
 
 	auth := r.Group("/api/auth")
 	{

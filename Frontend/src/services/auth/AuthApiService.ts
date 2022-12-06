@@ -9,10 +9,11 @@ const registerApi = (data: RegisterInterface) => {
   return httpAuth
     .post<RegisterInterface>("/api/auth/register", data)
     .then((res: any) => {
-      location.href = "/";
+      // location.href = "/"
       console.log(res.data);
     })
     .catch((err: any) => {
+      console.log(data);
       console.log(err);
     });
 };

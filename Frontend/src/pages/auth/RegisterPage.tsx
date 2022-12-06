@@ -7,6 +7,10 @@ import TelForm from "../../components/auth/TelForm";
 
 export default function RegisterPage() {
   const [validated, setValidated] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [tel, setTel] = useState("");
 
   const Validation = (e: any) => {
     const form = e.currentTarget;
@@ -18,29 +22,14 @@ export default function RegisterPage() {
     setValidated(true);
   };
 
-  const authState = {
-    username: "",
-    password: "",
-    email: "",
-    tel: "",
-    roe: Number,
-  };
-
-  const [register, setRegister] = useState<RegisterInterface>(authState);
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const { name, value } = e.target;
-    setRegister({ ...register, [name]: value });
-  };
-
-  const handleSubmit = () => {
     var data = {
-      username: register.username,
-      password: register.password,
-      email: register.email,
-      tel: register.tel,
+      username: username,
+      password: password,
+      email: email,
+      tel: tel,
       role: 1,
     };
 
@@ -72,7 +61,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="text"
                   // value={register.username}
-                  onChange={handleInputChange}
+                  onChange={(e: any) => setUsername(e.target.value)}
                   placeholder="Enter Username"
                   required
                 />
@@ -85,7 +74,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="email"
                   // value={register.email}
-                  onChange={handleInputChange}
+                  onChange={(e: any) => setEmail(e.target.value)}
                   placeholder="Enter Email"
                   required
                 />
@@ -98,7 +87,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="password"
                   // value={register.password}
-                  onChange={handleInputChange}
+                  onChange={(e: any) => setPassword(e.target.value)}
                   minLength={8}
                   maxLength={20}
                   placeholder="Enter Password"
@@ -112,7 +101,7 @@ export default function RegisterPage() {
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
                     type="password"
-                    onChange={handleInputChange}
+                    onChange={(e) => setFname(e.target.value)}
                     value={register.}
                     minLength={8}
                     placeholder="Confirm Password"
@@ -123,7 +112,7 @@ export default function RegisterPage() {
                 <Form.Control
                   type="tel"
                   // value={register.tel}
-                  onChange={handleInputChange}
+                  onChange={(e: any) => setTel(e.target.value)}
                   minLength={10}
                   maxLength={10}
                   placeholder="xxx-xxx-xxxx"
@@ -133,7 +122,7 @@ export default function RegisterPage() {
                   Please Enter Tel
                 </Form.Control.Feedback>
               </Form.Group>
-              <TelForm />
+              {/* <TelForm /> */}
               <Button
                 className="btn-lg mt-2 col-12"
                 variant="primary"

@@ -13,10 +13,14 @@ const registerApi = (data: RegisterInterface) => {
       const getMessage = res.data["message"];
       const message = `Register ${getMessage}`;
 
-      AuthSwal.registerSuccess(message);
+      if (getMessage == "Success") {
+        AuthSwal.registerSuccess(message);
+      } else {
+        AuthSwal.registerError(message);
+      }
     })
     .catch((err: any) => {
-      console.log(err);
+      AuthSwal.errCase(err);
     });
 };
 

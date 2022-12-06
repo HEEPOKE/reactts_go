@@ -15,12 +15,18 @@ const registerError = (message: any) => {
   Swal.fire({
     icon: "error",
     title: message,
-    html:
-      '<a href="http://localhost:5173/auth/login">click here</a> ' +
-      "Go to Login Page",
+    text: "Emailนี้ มีการใช้งานเเล้ว กรุณากรอก Email ใหม่อีกครั้ง",
   });
 };
 
-const AuthSwal = { registerSuccess, registerError };
+const errCase = (err: any) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: err,
+  });
+};
+
+const AuthSwal = { registerSuccess, registerError, errCase };
 
 export default AuthSwal;

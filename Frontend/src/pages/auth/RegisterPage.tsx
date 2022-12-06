@@ -107,6 +107,9 @@ export default function RegisterPage() {
                   maxLength={20}
                   placeholder="Confirm Password"
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please Enter ConfirmPassword
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Tel</Form.Label>

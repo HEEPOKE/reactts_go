@@ -1,5 +1,6 @@
 import { httpAuth } from "../../https/auth";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
+import Swal from "sweetalert2";
 
 const loginApi = () => {
   return httpAuth.get<RegisterInterface>("/api/auth/login");
@@ -13,7 +14,6 @@ const registerApi = (data: RegisterInterface) => {
       console.log(res.data);
     })
     .catch((err: any) => {
-      console.log(data);
       console.log(err);
     });
 };

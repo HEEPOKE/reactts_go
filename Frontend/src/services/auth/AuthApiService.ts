@@ -7,6 +7,7 @@ const loginApi = (data: LoginInterface) => {
   return httpAuth
     .post<LoginInterface>("/api/auth/login", data)
     .then((res: any) => {
+      localStorage.setItem("user", JSON.stringify(res.data["access_token"]));
       console.log(res.data);
     })
     .catch((err: any) => {
@@ -32,9 +33,17 @@ const registerApi = (data: RegisterInterface) => {
     });
 };
 
+const logoutApi = () => {
+  return httpAuth.get("/logout").then((res: any) => {
+    localStorage.removeItem("user");
+    window.location.href = "/auth/login";
+  });
+};
+
 const AuthApiServices = {
   loginApi,
   registerApi,
+  logoutApi,
 };
 
 export default AuthApiServices;

@@ -1,10 +1,10 @@
-import { httpAuth } from "../../https/auth";
+import http from "../../https/http";
 import LoginInterface from "../../interfaces/auth/LoginInterface";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthSwal from "../../utils/auth/swal/registerSwal";
 
 const loginApi = (data: LoginInterface) => {
-  return httpAuth
+  return http
     .post<LoginInterface>("/api/auth/login", data)
     .then((res: any) => {
       localStorage.setItem("user", JSON.stringify(res.data["access_token"]));
@@ -16,7 +16,7 @@ const loginApi = (data: LoginInterface) => {
 };
 
 const registerApi = (data: RegisterInterface) => {
-  return httpAuth
+  return http
     .post<RegisterInterface>("/api/auth/register", data)
     .then((res: any) => {
       const getMessage = res.data["message"];
@@ -34,7 +34,7 @@ const registerApi = (data: RegisterInterface) => {
 };
 
 const logoutApi = () => {
-  return httpAuth.get("/logout").then((res: any) => {
+  return http.get("/logout").then((res: any) => {
     localStorage.removeItem("user");
     window.location.href = "/auth/login";
   });

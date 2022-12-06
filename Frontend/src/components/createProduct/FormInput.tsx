@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Form, Button, Card } from "react-bootstrap";
+import ProductApi from "../../services/ProductServices";
 
 export default function FormInput() {
   const [validated, setValidated] = useState(false);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [color, setColor] = useState("");
+  const [price, setPrice] = useState("");
 
   const Validation = (e: any) => {
     const form = e.currentTarget;
@@ -13,6 +18,21 @@ export default function FormInput() {
     }
 
     setValidated(true);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const newPrice = parseInt(price);
+
+    var data = {
+      name: name,
+      category: category,
+      color: color,
+      price: newPrice,
+    };
+
+    ProductApi.AddProduct(data);
   };
 
   return (
@@ -25,7 +45,7 @@ export default function FormInput() {
                 <Form.Label>Name:</Form.Label>
                 <Form.Control
                   type="text"
-                  className="form-control"
+                  onChange={(e: any) => setName(e.target.value)}
                   placeholder="Enter Name"
                   required
                 />
@@ -37,7 +57,7 @@ export default function FormInput() {
                 <Form.Label>Category:</Form.Label>
                 <Form.Control
                   type="text"
-                  className="form-control"
+                  onChange={(e: any) => setCategory(e.target.value)}
                   placeholder="Enter Category"
                   required
                 />
@@ -47,7 +67,12 @@ export default function FormInput() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Color:</Form.Label>
-                <Form.Control type="text" placeholder="Enter Color" required />
+                <Form.Control
+                  type="text"
+                  onChange={(e: any) => setColor(e.target.value)}
+                  placeholder="Enter Color"
+                  required
+                />
                 <Form.Control.Feedback type="invalid">
                   Please Enter Color
                 </Form.Control.Feedback>
@@ -57,6 +82,7 @@ export default function FormInput() {
                 <Form.Control
                   type="number"
                   min={0}
+                  onChange={(e: any) => setPrice(e.target.value)}
                   placeholder="xxx bath"
                   required
                 />
@@ -66,7 +92,7 @@ export default function FormInput() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Row className="col-12 justify-content-center">
-                  <Button type="submit" className="btn col-4 mx-2">
+                  <Button className="btn col-4 mx-2" onClick={handleSubmit}>
                     Add
                   </Button>
                   <LinkContainer to="/product">

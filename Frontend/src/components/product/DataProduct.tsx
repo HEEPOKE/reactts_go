@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button } from "react-bootstrap";
-import axios from "axios";
 import ProductInterface from "../../interfaces/ProductInterface";
+import http from "../../https/http";
 
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:6476/api/product/read")
+    http
+      .get("/api/product/read")
       .then((res: any) => {
         setProduct(res.data);
-        console.log(res.data);
       })
-      .catch((e: any) => {
-        console.log(e);
+      .catch((err: any) => {
+        console.log(err);
       });
   }, []);
 

@@ -62,11 +62,11 @@ func Login(c *gin.Context) {
 		return
 	}
 	var userExist models.User
-	config.DB.Where("username = ?", json.Username).First(&userExist)
+	config.DB.Where("email = ?", json.Email).First(&userExist)
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "Error",
-			"message": "user Does Not Exist",
+			"message": "ยังไม่มีการสมัครสมาชิก",
 		})
 		return
 	}
@@ -82,6 +82,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "Ok",
 			"message": "Login Success",
+			"user_id": userExist.ID,
 			"token":   tokenString,
 		})
 		return

@@ -6,16 +6,38 @@ import { LinkContainer } from "react-router-bootstrap";
 import GoogleLoginButton from "../../features/GoogleLoginButton";
 import IConditionalRoute from "../../interfaces/history";
 import AuthService from "../../services/auth/AuthService";
-import UserInterface from "../../interfaces/UserInterface";
+import AuthApiServices from "../../services/auth/AuthApiService";
 
 export default function LoadingPage() {
+  const [validated, setValidated] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
+  const Validation = (e: any) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    var data = {
+      email: email,
+      password: password,
+    };
+
+    AuthApiServices.loginApi(data);
+  };
+
   const Back = () => {
     window.history.back();
   };
-
-  // const ConditionalRoute = ({ condition = false }: IConditionalRoute) => {
-  //   return condition ? <Outlet /> : <Navigate to={"/login"} />;
-  // };
 
   return (
     <section className="vh-100">
@@ -32,17 +54,24 @@ export default function LoadingPage() {
             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start mb-3">
               <h4>Login</h4>
             </div>
-            <Form>
+            <Form noValidate validated={validated} onSubmit={Validation}>
               <Form.Group>
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Enter Username" />
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="text"
+                  onChange={(e: any) => setEmail(e.target.value)}
+                  placeholder="Enter Email"
+                  required
+                />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   minLength={8}
+                  onChange={(e: any) => setPassword(e.target.value)}
                   placeholder="Enter Password"
+                  required
                 />
               </Form.Group>
               <Form.Group
@@ -55,9 +84,9 @@ export default function LoadingPage() {
                 </LinkContainer>
               </Form.Group>
               <Button
-                type="submit"
                 className="btn-lg mt-2 col-12"
                 variant="primary"
+                onClick={handleSubmit}
               >
                 Login
               </Button>

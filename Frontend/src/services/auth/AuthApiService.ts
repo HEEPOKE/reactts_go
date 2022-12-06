@@ -1,9 +1,17 @@
 import { httpAuth } from "../../https/auth";
+import LoginInterface from "../../interfaces/auth/LoginInterface";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthSwal from "../../utils/auth/swal/registerSwal";
 
-const loginApi = () => {
-  return httpAuth.get<RegisterInterface>("/api/auth/login");
+const loginApi = (data: LoginInterface) => {
+  return httpAuth
+    .post<LoginInterface>("/api/auth/login", data)
+    .then((res: any) => {
+      console.log(res.data);
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
 };
 
 const registerApi = (data: RegisterInterface) => {

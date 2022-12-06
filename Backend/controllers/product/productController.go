@@ -10,11 +10,11 @@ import (
 
 func ReadProduct(c *gin.Context) {
 	var product []models.Product
-	config.DB.First(&product)
+	config.DB.Order("id").Find(&product)
 	c.JSON(http.StatusOK, product)
 }
 
-func Create(c *gin.Context) {
+func AddProduct(c *gin.Context) {
 	var product models.Product
 	if err := c.ShouldBindJSON(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{

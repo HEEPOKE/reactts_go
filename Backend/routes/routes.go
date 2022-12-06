@@ -41,7 +41,7 @@ func Router() {
 	product := r.Group("/api/product")
 	{
 		product.GET("/read", ProductController.ReadProduct)
-		product.POST("/add", ProductController.Create)
+		product.POST("/add", ProductController.AddProduct)
 		product.PUT("/update/:id", ProductController.Edit)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}

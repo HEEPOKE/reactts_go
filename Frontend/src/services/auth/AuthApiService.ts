@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { httpAuth } from "../../https/auth";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
-import Swal from "sweetalert2";
-
-const navigate = useNavigate();
+import AuthSwal from "../../utils/auth/swal/registerSwal";
 
 const loginApi = () => {
   return httpAuth.get<RegisterInterface>("/api/auth/login");
@@ -13,9 +10,10 @@ const registerApi = (data: RegisterInterface) => {
   return httpAuth
     .post<RegisterInterface>("/api/auth/register", data)
     .then((res: any) => {
-      const message = res.data["message"];
-      navigate("/");
-      // console.log(res.data["message"]);
+      const getMessage = res.data["message"];
+      const message = `Register ${getMessage}`;
+
+      AuthSwal.registerSuccess(message);
     })
     .catch((err: any) => {
       console.log(err);

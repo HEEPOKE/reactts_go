@@ -28,7 +28,7 @@ func Register(c *gin.Context) {
 	if userExist.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "user Exist",
-			"status":  "error",
+			"status":  "Error",
 		})
 		return
 	}
@@ -43,14 +43,14 @@ func Register(c *gin.Context) {
 	config.DB.Create(&user)
 	if user.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "ok",
-			"message": "success",
+			"status":  "Ok",
+			"message": "Success",
 			"userId":  user.ID,
 		})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "error",
-			"message": "fail",
+			"status":  "Error",
+			"message": "Fail",
 		})
 	}
 }
@@ -65,7 +65,7 @@ func Login(c *gin.Context) {
 	config.DB.Where("username = ?", json.Username).First(&userExist)
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "error",
+			"status":  "Error",
 			"message": "user Does Not Exist",
 		})
 		return
@@ -80,14 +80,14 @@ func Login(c *gin.Context) {
 		tokenString, err := token.SignedString(hmacSampleSecret)
 		fmt.Println(tokenString, err)
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "ok",
+			"status":  "Ok",
 			"message": "Login Success",
 			"token":   tokenString,
 		})
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "error",
+			"status":  "Error",
 			"message": "Login Failed",
 		})
 		return

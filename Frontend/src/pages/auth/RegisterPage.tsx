@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
 import AuthApiServices from "../../services/auth/AuthApiService";
 import TelForm from "../../components/auth/TelForm";
+import ValidateSwal from "../../utils/auth/swal/validateSwal";
 
 export default function RegisterPage() {
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [tel, setTel] = useState("");
 
   const Validation = (e: any) => {
@@ -32,7 +33,11 @@ export default function RegisterPage() {
       role: 1,
     };
 
-    AuthApiServices.registerApi(data);
+    if (confirmPassword != password) {
+      ValidateSwal.confirmPasswordSwal();
+    } else {
+      AuthApiServices.registerApi(data);
+    }
   };
 
   const Back = () => {
@@ -59,7 +64,6 @@ export default function RegisterPage() {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  // value={register.username}
                   onChange={(e: any) => setUsername(e.target.value)}
                   placeholder="Enter Username"
                   required
@@ -72,7 +76,6 @@ export default function RegisterPage() {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  // value={register.email}
                   onChange={(e: any) => setEmail(e.target.value)}
                   placeholder="Enter Email"
                   required
@@ -85,7 +88,6 @@ export default function RegisterPage() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  // value={register.password}
                   onChange={(e: any) => setPassword(e.target.value)}
                   minLength={8}
                   maxLength={20}
@@ -96,21 +98,20 @@ export default function RegisterPage() {
                   Please Enter Password
                 </Form.Control.Feedback>
               </Form.Group>
-              {/* <Form.Group className="mb-3">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    onChange={(e) => setFname(e.target.value)}
-                    value={register.}
-                    minLength={8}
-                    placeholder="Confirm Password"
-                  />
-                </Form.Group> */}
+              <Form.Group className="mb-3">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  onChange={(e: any) => setConfirmPassword(e.target.value)}
+                  minLength={8}
+                  maxLength={20}
+                  placeholder="Confirm Password"
+                />
+              </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Tel</Form.Label>
                 <Form.Control
                   type="tel"
-                  // value={register.tel}
                   onChange={(e: any) => setTel(e.target.value)}
                   minLength={10}
                   maxLength={10}
@@ -126,7 +127,6 @@ export default function RegisterPage() {
                 className="btn-lg mt-2 col-12"
                 variant="primary"
                 onClick={handleSubmit}
-                // type="submit"
               >
                 Submit
               </Button>

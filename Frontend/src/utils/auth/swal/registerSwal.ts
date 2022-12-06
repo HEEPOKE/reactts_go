@@ -6,11 +6,21 @@ const registerSuccess = (message: any) => {
     title: message,
     html:
       '<a href="http://localhost:5173/auth/login">click here</a> ' +
-      "Go to Login Page, ",
+      "Go to Login Page",
     showConfirmButton: false,
   });
 };
 
-const AuthSwal = { registerSuccess };
+const registerError = (message: any) => {
+  Swal.fire({
+    icon: "error",
+    title: message,
+    html:
+      '<a href="http://localhost:5173/auth/login">click here</a> ' +
+      "Go to Login Page",
+  });
+};
+
+const AuthSwal = { registerSuccess, registerError };
 
 export default AuthSwal;

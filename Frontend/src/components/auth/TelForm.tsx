@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-import TelInterface from "../../interfaces/auth/TelInterface";
 
-export default class TelForm extends Component<{}, any> {
-  constructor() {
-    super();
+export default class TelForm extends Component<{},any> {
+  constructor(props: any) {
+    super(props);
     this.state = { value: "" };
     this.onChange = this.onChange.bind(this);
   }

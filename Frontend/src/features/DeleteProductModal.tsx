@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DeleteStoreModal() {
+export default function DeleteProductModal() {
   return (
     <div>DeleteStoreModal</div>
   )

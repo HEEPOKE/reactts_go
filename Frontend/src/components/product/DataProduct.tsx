@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
 import ProductSwal from "../../utils/product";
@@ -36,7 +37,7 @@ export default function DataProducts() {
               <th>Color</th>
               <th>Category</th>
               <th>Price</th>
-              <th>Manage</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -67,7 +68,7 @@ export default function DataProducts() {
               <th>Color</th>
               <th>Category</th>
               <th>Price</th>
-              <th>Manage</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -81,10 +82,13 @@ export default function DataProducts() {
                   <td>{value.price} bath</td>
                   <td>
                     <Button type="button" className="btn btn-warning mx-2">
-                      Edit
+                      <FontAwesomeIcon icon={["fas", "pen"]} size={"xl"} />
                     </Button>
                     <Button type="button" className="btn btn-danger">
-                      Delete
+                      <FontAwesomeIcon
+                        icon={["fas", "trash-can"]}
+                        size={"xl"}
+                      />
                     </Button>
                   </td>
                 </tr>
@@ -112,7 +116,7 @@ export default function DataProducts() {
               <th>Color</th>
               <th>Category</th>
               <th>Price</th>
-              <th>Manage</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

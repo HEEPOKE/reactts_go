@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import * as Yup from "yup";
 import { LinkContainer } from "react-router-bootstrap";
 import GoogleLoginButton from "../../features/GoogleLoginButton";
-import IConditionalRoute from "../../interfaces/history";
+import IConditionalRoute from "../../interfaces/ResponseInterface";
 import AuthService from "../../services/auth/AuthService";
 import AuthApiServices from "../../services/auth/AuthApiService";
 

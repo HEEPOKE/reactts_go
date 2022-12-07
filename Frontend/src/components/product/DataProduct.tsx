@@ -9,10 +9,6 @@ import DeleteProductModal from "../../features/DeleteProductModal";
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
   const [selectedItem, setSelectedItem] = useState({});
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     http
@@ -74,16 +70,6 @@ export default function DataProducts() {
                         size={"xl"}
                       />
                     </Button>
-                    <DeleteProductModal
-                      show={show}
-                      hide={() => {
-                        setShow(false);
-                        setSelectedItem({});
-                      }}
-                      item={() => {
-                        setSelectedItem({});
-                      }}
-                    />
                   </td>
                 </tr>
               );

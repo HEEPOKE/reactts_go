@@ -1,29 +1,19 @@
 import http from "../https/http";
-import ProductInterface from "../interfaces/ProductInterface";
 import ProductSwal from "../utils/product";
+import ProductInterface from "../interfaces/ProductInterface";
 
 const AddProduct = (data: any) => {
   return http
     .post<ProductInterface>("/api/product/add", data)
     .then((res: any) => {
-      window.location.href = "/product";
-    })
-    .catch((err: any) => {
-      ProductSwal.caseErr(err);
-    });
-};
-
-const DeleteSwal = (id: any) => {
-  return http
-    .delete(`/api/product/delete/${id}`)
-    .then((res: any) => {
-      const status = res.data["status"]
-      const message = res.data["message"]
+      const status = res.data["status"];
+      const message = res.data["message"];
+      const link = "/product";
 
       if (status == "Success") {
-        ProductSwal.caseSuccess(message) 
+        ProductSwal.caseSuccess({ message, link });
       } else {
-        ProductSwal.resErr(message)
+        ProductSwal.resErr(message);
       }
     })
     .catch((err: any) => {
@@ -31,6 +21,25 @@ const DeleteSwal = (id: any) => {
     });
 };
 
-const ProductApi = { AddProduct, DeleteSwal };
+const DeleteProduct = (id: any) => {
+  return http
+    .delete(`/api/product/delete/${id}`)
+    .then((res: any) => {
+      const status = res.data["status"];
+      const message = res.data["message"];
+      const link = "getReload";
+
+      if (status == "Success") {
+        ProductSwal.caseSuccess({ message, link });
+      } else {
+        ProductSwal.resErr(message);
+      }
+    })
+    .catch((err: any) => {
+      ProductSwal.caseErr(err);
+    });
+};
+
+const ProductApi = { AddProduct, DeleteProduct };
 
 export default ProductApi;

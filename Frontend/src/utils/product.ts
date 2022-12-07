@@ -1,9 +1,18 @@
 import Swal from "sweetalert2";
-import DeleteProductInterface from "../interfaces/DeleteProductInterface";
 import ProductApi from "../services/ProductServices";
+import DeleteProductInterface from "../interfaces/DeleteProductInterface";
+import ResponseInterface from "../interfaces/ResponseInterface";
 
 function historyBack() {
   window.history.back();
+}
+
+function reload() {
+  window.location.reload();
+}
+
+function con(link: any) {
+  window.location.href = `${link}`;
 }
 
 const readErr = (err: any) => {
@@ -13,8 +22,8 @@ const readErr = (err: any) => {
     text: err,
     showConfirmButton: true,
     confirmButtonText: "Back",
-  }).then((res: any) => {
-    if (res.isConfirmed) {
+  }).then((result: any) => {
+    if (result.isConfirmed) {
       historyBack();
     }
   });
@@ -31,17 +40,29 @@ const confirmDelete = ({ id, name }: DeleteProductInterface) => {
     denyButtonText: "Confirm",
   }).then((result: any) => {
     if (result.isDenied) {
-      ProductApi.DeleteSwal(id);
+      ProductApi.DeleteProduct(id);
     }
   });
 };
 
-const caseSuccess = (message: any) => {
+const caseSuccess = ({ message, link }: ResponseInterface) => {
   Swal.fire({
     icon: "success",
     title: "Success",
     text: `${message}`,
-  });
+  })
+    .then((result: any) => {
+      if (result.isConfirmed) {
+        if (link == "getReload") {
+          reload();
+        } else {
+          con(link);
+        }
+      }
+    })
+    .catch((err: any) => {
+      caseErr(err);
+    });
 };
 
 const resErr = (message: any) => {

@@ -14,6 +14,7 @@ const readErr = (err: any) => {
   }).then((res: any) => {
     if (res.isConfirmed) {
       historyBack();
+    }
   });
 };
 

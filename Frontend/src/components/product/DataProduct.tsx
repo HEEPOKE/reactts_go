@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Button } from "react-bootstrap";
 import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
+import ProductSwal from "../../utils/product";
 
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
@@ -13,7 +14,7 @@ export default function DataProducts() {
         setProduct(res.data);
       })
       .catch((err: any) => {
-        console.log(err);
+        ProductSwal.readErr(err);
       });
   }, []);
 
@@ -77,7 +78,7 @@ export default function DataProducts() {
                   <td>{value.name}</td>
                   <td>{value.color}</td>
                   <td>{value.category}</td>
-                  <td>{value.price}</td>
+                  <td>{value.price} bath</td>
                   <td>
                     <Button type="button" className="btn btn-warning mx-2">
                       Edit

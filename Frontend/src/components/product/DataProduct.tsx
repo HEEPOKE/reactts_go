@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LinkContainer } from "react-router-bootstrap";
 import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
 import ProductSwal from "../../utils/product";
-import DeleteProductModal from "../../features/DeleteProductModal";
 
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
-  const [selectedItem, setSelectedItem] = useState({});
 
   useEffect(() => {
     http
@@ -52,9 +51,11 @@ export default function DataProducts() {
                   <td>{item.category}</td>
                   <td>{item.price} bath</td>
                   <td>
-                    <Button type="button" className="btn btn-warning mx-2">
-                      <FontAwesomeIcon icon={["fas", "pen"]} size={"xl"} />
-                    </Button>
+                    <LinkContainer to={`/update-product/${item.ID}`}>
+                      <Button type="button" className="btn btn-warning mx-2">
+                        <FontAwesomeIcon icon={["fas", "pen"]} size={"xl"} />
+                      </Button>
+                    </LinkContainer>
                     <Button
                       type="button"
                       className="btn btn-danger"

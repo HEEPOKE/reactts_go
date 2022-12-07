@@ -48,7 +48,7 @@ export default function DataProducts() {
         </Table>
       </Container>
     );
-  } else if (product.length <= 1) {
+  } else if (product.length >= 1) {
     return (
       <Container className="mt-2">
         <Table
@@ -73,7 +73,7 @@ export default function DataProducts() {
             {product.map((value, i) => {
               return (
                 <tr key={value.ID}>
-                  <td>{value.ID}</td>
+                  <td>{i++}</td>
                   <td>{value.name}</td>
                   <td>{value.color}</td>
                   <td>{value.category}</td>

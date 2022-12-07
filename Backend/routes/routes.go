@@ -42,7 +42,8 @@ func Router() {
 	{
 		product.GET("/read", ProductController.ReadProduct)
 		product.POST("/add", ProductController.AddProduct)
-		product.PUT("/update/:id", ProductController.Edit)
+		product.GET("/get/:id", ProductController.GetProductById)
+		product.PATCH("/update/:id", ProductController.UpdateProduct)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
 

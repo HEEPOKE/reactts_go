@@ -6,8 +6,8 @@ import (
 
 type Product struct {
 	gorm.Model
-	Name     string `json:"name"`
-	Category string `json:"category"`
-	Color    string `json:"color"`
-	Price    uint   `json:"price"`
+	Name     string `json:"name" binding:"required"`
+	Category string `json:"category" binding:"required"`
+	Color    string `json:"color" binding:"required"`
+	Price    uint   `json:"price" binding:"required"`
 }

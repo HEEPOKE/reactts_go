@@ -14,42 +14,77 @@ func ReadProduct(c *gin.Context) {
 	c.JSON(http.StatusOK, product)
 }
 
+func GetProductById(c *gin.Context) {
+	id := c.Param("id")
+	var product []models.Product
+	if err := config.DB.Where("id = ?", id).First(&product).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status":  "Fail",
+			"message": "Record not found!",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, product)
+}
+
 func AddProduct(c *gin.Context) {
 	var product models.Product
 	if err := c.ShouldBindJSON(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+			"status": "Fail",
+			"error":  err.Error(),
 		})
 	}
 	result := config.DB.Create(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"Create": result.RowsAffected,
+		"add":     result.RowsAffected,
+		"status":  "Success",
+		"message": "Add Success",
 	})
 }
 
-func Edit(c *gin.Context) {
+func UpdateProduct(c *gin.Context) {
 	id := c.Param("id")
 	var product models.Product
 	var productUpdate models.Product
-	if err := c.ShouldBindJSON(&product); err != nil {
+	if err := config.DB.Where("id = ?", id).First(&product).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+			"status":  "Fail",
+			"message": "Record not found!",
 		})
+		return
 	}
-	config.DB.First(&productUpdate, id)
-	result := config.DB.Save(&productUpdate)
-	c.JSON(http.StatusOK, result)
+
+	if err := c.ShouldBindJSON(&productUpdate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "Fail",
+			"error":  err.Error(),
+		})
+		return
+	}
+
+	config.DB.Model(&product).Updates(productUpdate)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "Success",
+		"message": "Update Success",
+		"data":    product,
+	})
 }
 
 func Delete(c *gin.Context) {
 	id := c.Param("id")
 	var product models.Product
-	if err := c.ShouldBindJSON(&product); err != nil {
+	if err := config.DB.Where("id = ?", id).First(&product).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
+			"status":  "Fail",
+			"message": "Record not found!",
 		})
+		return
 	}
-	config.DB.First(&product, id)
 	result := config.DB.Delete(&product)
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, gin.H{
+		"del":     result.RowsAffected,
+		"status":  "Success",
+		"message": "Delete Success",
+	})
 }

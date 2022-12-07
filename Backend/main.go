@@ -15,5 +15,4 @@ func main() {
 	}
 	config.Database()
 	routes.Router()
-	// gin.SetMode(gin.ReleaseMode)
 }

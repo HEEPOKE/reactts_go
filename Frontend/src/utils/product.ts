@@ -25,6 +25,7 @@ const confirmDelete = ({ id, name }: DeleteProductInterface) => {
     icon: "warning",
     title: "Confirm Delete Product",
     text: `คุณต้องการลบสิ้นค้าชื่อ ${name} ใช่หรือไม่`,
+    showConfirmButton: false,
     showDenyButton: true,
     showCancelButton: true,
     denyButtonText: "Confirm",
@@ -35,6 +36,32 @@ const confirmDelete = ({ id, name }: DeleteProductInterface) => {
   });
 };
 
-const ProductSwal = { readErr, confirmDelete };
+const caseSuccess = (message: any) => {
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text: `${message}`,
+  });
+};
+
+const resErr = (message: any) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: `${message}`,
+    denyButtonText: "OK",
+  });
+};
+
+const caseErr = (err: any) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: `Error: ${err}`,
+    denyButtonText: "OK",
+  });
+};
+
+const ProductSwal = { readErr, confirmDelete, caseSuccess, resErr, caseErr };
 
 export default ProductSwal;

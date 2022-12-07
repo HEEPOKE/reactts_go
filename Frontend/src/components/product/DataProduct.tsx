@@ -62,10 +62,12 @@ export default function DataProducts() {
                     <Button
                       type="button"
                       className="btn btn-danger"
-                      onClick={() => {
-                        setShow(true);
-                        setSelectedItem(item);
-                      }}
+                      onClick={() =>
+                        ProductSwal.confirmDelete({
+                          id: item.ID,
+                          name: item.name,
+                        })
+                      }
                     >
                       <FontAwesomeIcon
                         icon={["fas", "trash-can"]}

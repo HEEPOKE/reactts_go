@@ -4,9 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
 import ProductSwal from "../../utils/product";
+import DeleteProductModal from "../../features/DeleteProductModal";
 
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
+  const [selectedItem, setSelectedItem] = useState({});
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     http
@@ -19,38 +25,7 @@ export default function DataProducts() {
       });
   }, []);
 
-  if (product.length < 1) {
-    return (
-      <Container className="mt-2">
-        <Table
-          striped
-          bordered
-          hover
-          responsive
-          variant="dark"
-          className="text-center"
-        >
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Color</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colSpan={6}>
-                <h2 className="mt-2">ยังไม่มีข้อมูล</h2>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </Container>
-    );
-  } else if (product.length >= 1) {
+  if (product.length >= 1) {
     return (
       <Container className="mt-2">
         <Table
@@ -84,16 +59,64 @@ export default function DataProducts() {
                     <Button type="button" className="btn btn-warning mx-2">
                       <FontAwesomeIcon icon={["fas", "pen"]} size={"xl"} />
                     </Button>
-                    <Button type="button" className="btn btn-danger">
+                    <Button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => {
+                        setShow(true);
+                        setSelectedItem(value);
+                      }}
+                    >
                       <FontAwesomeIcon
                         icon={["fas", "trash-can"]}
                         size={"xl"}
                       />
                     </Button>
+                    <DeleteProductModal
+                      show={show}
+                      hide={() => {
+                        setShow(false);
+                        setSelectedItem({});
+                      }}
+                      value={() => {
+                        setSelectedItem({});
+                      }}
+                    />
                   </td>
                 </tr>
               );
             })}
+          </tbody>
+        </Table>
+      </Container>
+    );
+  } else if (product.length < 1) {
+    return (
+      <Container className="mt-2">
+        <Table
+          striped
+          bordered
+          hover
+          responsive
+          variant="dark"
+          className="text-center"
+        >
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Color</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colSpan={6}>
+                <h2 className="mt-2">ยังไม่มีข้อมูล</h2>
+              </td>
+            </tr>
           </tbody>
         </Table>
       </Container>

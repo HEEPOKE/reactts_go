@@ -13,6 +13,17 @@ const AddProduct = (data: any) => {
     });
 };
 
-const ProductApi = { AddProduct };
+const DeleteSwal = (id: any) => {
+  return http
+    .delete(`/api/product/delete/${id}`)
+    .then((res: any) => {
+      console.log(res.data);
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
+};
+
+const ProductApi = { AddProduct, DeleteSwal };
 
 export default ProductApi;

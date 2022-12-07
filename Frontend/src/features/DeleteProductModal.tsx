@@ -2,11 +2,11 @@ import React from "react";
 import { Modal,Button } from "react-bootstrap";
 
 export default function DeleteProductModal({
-  value,
+  item,
   show,
   hide,
 }: {
-  value: any;
+  item: any;
   show: any;
   hide: any;
 }) {

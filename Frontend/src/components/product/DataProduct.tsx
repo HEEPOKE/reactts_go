@@ -47,14 +47,14 @@ export default function DataProducts() {
             </tr>
           </thead>
           <tbody>
-            {product.map((value, i) => {
+            {product.map((item, i) => {
               return (
-                <tr key={value.ID}>
+                <tr key={item.ID}>
                   <td>{i++}</td>
-                  <td>{value.name}</td>
-                  <td>{value.color}</td>
-                  <td>{value.category}</td>
-                  <td>{value.price} bath</td>
+                  <td>{item.name}</td>
+                  <td>{item.color}</td>
+                  <td>{item.category}</td>
+                  <td>{item.price} bath</td>
                   <td>
                     <Button type="button" className="btn btn-warning mx-2">
                       <FontAwesomeIcon icon={["fas", "pen"]} size={"xl"} />
@@ -64,7 +64,7 @@ export default function DataProducts() {
                       className="btn btn-danger"
                       onClick={() => {
                         setShow(true);
-                        setSelectedItem(value);
+                        setSelectedItem(item);
                       }}
                     >
                       <FontAwesomeIcon
@@ -78,7 +78,7 @@ export default function DataProducts() {
                         setShow(false);
                         setSelectedItem({});
                       }}
-                      value={() => {
+                      item={() => {
                         setSelectedItem({});
                       }}
                     />

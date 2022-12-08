@@ -35,9 +35,8 @@ func AddProduct(c *gin.Context) {
 			"error":  err.Error(),
 		})
 	}
-	result := config.DB.Create(&product)
+	config.DB.Create(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"add":     result.RowsAffected,
 		"status":  "Success",
 		"message": "Add Success",
 	})
@@ -81,9 +80,8 @@ func Delete(c *gin.Context) {
 		})
 		return
 	}
-	result := config.DB.Delete(&product)
+	config.DB.Delete(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"del":     result.RowsAffected,
 		"status":  "Success",
 		"message": "Delete Success",
 	})

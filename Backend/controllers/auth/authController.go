@@ -43,7 +43,7 @@ func Register(c *gin.Context) {
 	config.DB.Create(&user)
 	if user.ID > 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "Ok",
+			"status":  "Success",
 			"message": "Success",
 			"userId":  user.ID,
 		})
@@ -58,7 +58,10 @@ func Register(c *gin.Context) {
 func Login(c *gin.Context) {
 	var json models.User
 	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":  err.Error(),
+			"status": "Fail",
+		})
 		return
 	}
 	var userExist models.User

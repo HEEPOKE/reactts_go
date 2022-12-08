@@ -37,7 +37,7 @@ const confirmDelete = ({ id, name }: DeleteProductInterface) => {
     showConfirmButton: false,
     showDenyButton: true,
     showCancelButton: true,
-    denyButtonText: "Confirm",
+    denyButtonText: "Delete",
   }).then((result: any) => {
     if (result.isDenied) {
       ProductApi.DeleteProduct(id);

@@ -19,10 +19,10 @@ export default function FormUpdate() {
     http
       .get(`/api/product/get/${params.id}`)
       .then((res: any) => {
-        // setName(res.data.name);
-        // setCategory(res.data.category);
-        // setColor(res.data.color);
-        // setPrice(res.data.price);
+        setName(res.data.name);
+        setCategory(res.data.category);
+        setColor(res.data.color);
+        setPrice(res.data.price);
       })
       .catch((err: any) => {
         ProductSwal.readErr(err);

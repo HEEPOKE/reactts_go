@@ -11,7 +11,9 @@ import (
 func ReadProduct(c *gin.Context) {
 	var product []models.Product
 	config.DB.Order("id").Find(&product)
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, gin.H{
+		"data": product,
+	})
 }
 
 func GetProductById(c *gin.Context) {

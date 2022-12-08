@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Form, Button, Card } from "react-bootstrap";
-import ProductApi from "../../services/ProductServices";
+import ProductInterface from "../../interfaces/ProductInterface";
+import http from "../../https/http";
+import ProductSwal from "../../utils/product";
+import { useParams } from "react-router-dom";
 
 export default function FormUpdate() {
   const [validated, setValidated] = useState(false);
@@ -9,6 +12,20 @@ export default function FormUpdate() {
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
+  const [product, setProduct] = useState<ProductInterface[]>([]);
+
+  const params = useParams();
+
+  useEffect(() => {
+    http
+      .get(`/api/product/get/${params.id}`)
+      .then((res: any) => {
+        setProduct(res.data);
+      })
+      .catch((err: any) => {
+        ProductSwal.readErr(err);
+      });
+  }, []);
 
   const Validation = (e: any) => {
     const form = e.currentTarget;
@@ -31,8 +48,6 @@ export default function FormUpdate() {
       color: color,
       price: newPrice,
     };
-
-    ProductApi.AddProduct(data);
   };
 
   return (
@@ -92,8 +107,12 @@ export default function FormUpdate() {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Row className="col-12 justify-content-center">
-                  <Button className="btn col-4 mx-2" onClick={handleSubmit}>
-                    Add
+                  <Button
+                    type="submit"
+                    className="btn col-4 mx-2"
+                    onClick={handleSubmit}
+                  >
+                    Update
                   </Button>
                   <LinkContainer to="/product">
                     <Button className="col-4" variant="danger">

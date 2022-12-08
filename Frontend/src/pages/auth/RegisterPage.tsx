@@ -18,8 +18,7 @@ export default function RegisterPage() {
       e.preventDefault();
       e.stopPropagation();
     }
-
-    setValidated(true);
+      setValidated(true);
   };
 
   const handleSubmit = (e: any) => {
@@ -106,6 +105,7 @@ export default function RegisterPage() {
                   minLength={8}
                   maxLength={20}
                   placeholder="Confirm Password"
+                  required
                 />
                 <Form.Control.Feedback type="invalid">
                   Please Enter ConfirmPassword
@@ -127,6 +127,7 @@ export default function RegisterPage() {
               </Form.Group>
               {/* <TelForm /> */}
               <Button
+                type="submit"
                 className="btn-lg mt-2 col-12"
                 variant="primary"
                 onClick={handleSubmit}

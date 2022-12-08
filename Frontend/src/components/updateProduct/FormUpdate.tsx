@@ -12,7 +12,6 @@ export default function FormUpdate() {
   const [category, setCategory] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
-  const [product, setProduct] = useState<ProductInterface[]>([]);
 
   const params = useParams();
 
@@ -20,12 +19,15 @@ export default function FormUpdate() {
     http
       .get(`/api/product/get/${params.id}`)
       .then((res: any) => {
-        setProduct(res.data);
+        // setName(res.data.name);
+        // setCategory(res.data.category);
+        // setColor(res.data.color);
+        // setPrice(res.data.price);
       })
       .catch((err: any) => {
         ProductSwal.readErr(err);
       });
-  }, []);
+  }, [`${params.id}`]);
 
   const Validation = (e: any) => {
     const form = e.currentTarget;
@@ -61,7 +63,7 @@ export default function FormUpdate() {
                 <Form.Control
                   type="text"
                   onChange={(e: any) => setName(e.target.value)}
-                  placeholder="Enter Name"
+                  value={name}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -73,7 +75,7 @@ export default function FormUpdate() {
                 <Form.Control
                   type="text"
                   onChange={(e: any) => setCategory(e.target.value)}
-                  placeholder="Enter Category"
+                  value={category}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -85,7 +87,7 @@ export default function FormUpdate() {
                 <Form.Control
                   type="text"
                   onChange={(e: any) => setColor(e.target.value)}
-                  placeholder="Enter Color"
+                  value={color}
                   required
                 />
                 <Form.Control.Feedback type="invalid">
@@ -98,7 +100,7 @@ export default function FormUpdate() {
                   type="number"
                   min={0}
                   onChange={(e: any) => setPrice(e.target.value)}
-                  placeholder="xxx bath"
+                  value={price}
                   required
                 />
                 <Form.Control.Feedback type="invalid">

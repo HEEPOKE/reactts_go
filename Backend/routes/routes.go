@@ -5,6 +5,7 @@ import (
 	ProductController "Backend/api/controllers/product"
 	UserController "Backend/api/controllers/user"
 	"Backend/api/middleware"
+	GoogleServices "Backend/api/services/auth"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -13,9 +14,9 @@ import (
 func Router() {
 	r := gin.Default()
 	// r.Use(cors.New(cors.Config{
-	// 	AllowOrigins:     []string{os.Getenv("ENDPOINT_URL")},
-	// 	AllowMethods:     []string{"GET", "POST"},
-	// 	AllowHeaders:     []string{"Content-Type"},
+	// 	AllowOrigins:     []string{"*"},
+	// 	AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS"},
+	// 	AllowHeaders:     []string{"Content-Type", "Authorization", "X-Requested-With"},
 	// 	ExposeHeaders:    []string{"Content-Length"},
 	// 	AllowCredentials: true,
 	// 	AllowOriginFunc: func(origin string) bool {
@@ -30,6 +31,7 @@ func Router() {
 		auth.POST("/login", AuthController.Login)
 		auth.POST("/register", AuthController.Register)
 		auth.GET("/logout", AuthController.Logout)
+		auth.GET("/google-login", GoogleServices.Test)
 	}
 
 	authorized := r.Group("/api/users", middleware.ValidationUsers())

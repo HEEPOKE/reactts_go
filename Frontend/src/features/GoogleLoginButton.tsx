@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { gapi } from "gapi-script";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function GoogleLoginButton() {
   const [profileData, setProfileData] = useState(
@@ -10,7 +11,10 @@ export default function GoogleLoginButton() {
       : null
   );
 
-  const clientId = "203320795555-scusrjuu1d5uv37cpncjd0bpkc9i1f2j.apps.googleusercontent.com";
+  const navigation = useNavigate();
+
+  const clientId =
+    "203320795555-scusrjuu1d5uv37cpncjd0bpkc9i1f2j.apps.googleusercontent.com";
   // const clientId = process.env.CLIENT_ID as any;
 
   useEffect(() => {
@@ -24,20 +28,20 @@ export default function GoogleLoginButton() {
     gapi.load("client:auth2", initClient);
   }, []);
 
-  const handleLogin = async (googleData: any) => {
-    const res = await fetch("api/auth/google-login", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.id_token,
-      }),
-      headers: {
-        "Contentent-Type": "application/json",
-      },
+  const handleLogin = (googleData: any) => {
+    const jsonData = JSON.stringify({
+      token: googleData.id_token,
     });
 
-    const data = await res.json();
-    setProfileData(data);
-    localStorage.setItem("profileData", JSON.stringify(data));
+    axios
+      .get("http://localhost:6476/api/auth/google-login")
+      .then((res: any) => {
+        // const data = res.data.data();
+
+        // setProfileData(data);
+        // localStorage.setItem("profileData", JSON.stringify(data));
+        navigation("/");
+      });
   };
 
   const error = (res: any) => {
@@ -60,11 +64,6 @@ export default function GoogleLoginButton() {
         isSignedIn={true}
         className="mt-2 col-12"
       />
-      {profileData ? (
-        <h1>{profileData.id_token ?? "NULL"}</h1>
-      ) : (
-        <div className="mt-2 mb-3">{"no"}</div>
-      )}
     </>
   );
 }

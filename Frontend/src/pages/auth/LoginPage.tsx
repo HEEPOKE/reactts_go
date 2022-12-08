@@ -1,7 +1,6 @@
 import React, { useState, Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Navigate, Outlet } from "react-router-dom";
-import * as Yup from "yup";
 import { LinkContainer } from "react-router-bootstrap";
 import GoogleLoginButton from "../../features/GoogleLoginButton";
 import IConditionalRoute from "../../interfaces/ResponseInterface";

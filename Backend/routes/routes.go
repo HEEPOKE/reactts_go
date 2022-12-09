@@ -6,6 +6,8 @@ import (
 	UserController "Backend/api/controllers/user"
 	"Backend/api/middleware"
 	GoogleServices "Backend/api/services/auth"
+	"os"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -13,18 +15,18 @@ import (
 
 func Router() {
 	r := gin.Default()
-	// r.Use(cors.New(cors.Config{
-	// 	AllowOrigins:     []string{"*"},
-	// 	AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS"},
-	// 	AllowHeaders:     []string{"Content-Type", "Authorization", "X-Requested-With"},
-	// 	ExposeHeaders:    []string{"Content-Length"},
-	// 	AllowCredentials: true,
-	// 	AllowOriginFunc: func(origin string) bool {
-	// 		return origin == os.Getenv("ENDPOINT_URL")
-	// 	},
-	// 	MaxAge: 12 * time.Hour,
-	// }))
-	r.Use(cors.Default())
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization", "X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == os.Getenv("ENDPOINT_URL")
+		},
+		MaxAge: 12 * time.Hour,
+	}))
+	// r.Use(cors.Default())
 
 	auth := r.Group("/api/auth")
 	{

@@ -14,6 +14,7 @@ export default function DataProducts() {
       .get("/api/product/read")
       .then((res: any) => {
         setProduct(res.data);
+        console.log(res.data);
       })
       .catch((err: any) => {
         ProductSwal.readErr(err);

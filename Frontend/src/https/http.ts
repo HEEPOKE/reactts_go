@@ -7,7 +7,7 @@ const http = axios.create({
   baseURL: "http://localhost:6476",
   headers: {
     "Content-type": "application/json",
-    Authorization: "Bearer " + access_token,
+    Authorization: `Bearer ${access_token}`,
   },
 });
 

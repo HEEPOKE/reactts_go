@@ -22,8 +22,8 @@ const readErr = (err: any) => {
     text: err,
     showConfirmButton: true,
     confirmButtonText: "Back",
-  }).then((result: any) => {
-    if (result.isConfirmed) {
+  }).then((res: any) => {
+    if (res.isConfirmed) {
       historyBack();
     }
   });
@@ -38,8 +38,8 @@ const confirmDelete = ({ id, name }: DeleteProductInterface) => {
     showDenyButton: true,
     showCancelButton: true,
     denyButtonText: "Delete",
-  }).then((result: any) => {
-    if (result.isDenied) {
+  }).then((res: any) => {
+    if (res.isDenied) {
       ProductApi.DeleteProduct(id);
     }
   });
@@ -51,8 +51,8 @@ const caseSuccess = ({ message, link }: ResponseInterface) => {
     title: "Success",
     text: `${message}`,
   })
-    .then((result: any) => {
-      if (result.isConfirmed) {
+    .then((res: any) => {
+      if (res.isConfirmed) {
         if (link == "getReload") {
           reload();
         } else {

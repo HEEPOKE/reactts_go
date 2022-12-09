@@ -10,7 +10,7 @@ const logouthandle = () => {
     denyButtonText: "Confirm",
     showCancelButton: true,
   }).then((res: any) => {
-    if (res.isConfirmed) {
+    if (res.isDenied) {
       AuthApiServices.logoutApi();
     }
   });

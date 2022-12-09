@@ -8,7 +8,7 @@ export default function RightMenu() {
   if (access_token != null) {
     return (
       <>
-        <NavDropdown title="Profile" id="nav-dropdown" className="mx-2">
+        <NavDropdown title="Profile" id="nav-dropdown" menuVariant="dark">
           <LinkContainer to="/profile">
             <NavDropdown.Item>Profile</NavDropdown.Item>
           </LinkContainer>

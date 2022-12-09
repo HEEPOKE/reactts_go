@@ -19,7 +19,7 @@ export default function NavbarMenu() {
             <LinkContainer to="/product">
               <Nav.Link>Product</Nav.Link>
             </LinkContainer>
-            <NavDropdown title="Manage" id="nav-dropdown">
+            <NavDropdown title="Manage" id="nav-dropdown" menuVariant="dark">
               <LinkContainer to="/create-product">
                 <NavDropdown.Item>Create</NavDropdown.Item>
               </LinkContainer>

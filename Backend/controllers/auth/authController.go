@@ -68,7 +68,7 @@ func Login(c *gin.Context) {
 	config.DB.Where("email = ?", json.Email).First(&userExist)
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "Error",
+			"status":  "Fail",
 			"message": "อีเมล์นี้ยังไม่ได้ทำการสมัครสมาชิก",
 		})
 		return

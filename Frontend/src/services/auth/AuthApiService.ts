@@ -43,7 +43,7 @@ const registerApi = (data: RegisterInterface) => {
 };
 
 const logoutApi = () => {
-  return http.get("/logout").then((res: any) => {
+  return http.get("api/auth/logout").then((res: any) => {
     sessionStorage.removeItem("access_token");
     window.location.href = "/";
   });

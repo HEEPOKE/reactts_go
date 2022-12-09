@@ -6,7 +6,7 @@ export default function AuthButton() {
   const access_token = sessionStorage.getItem("access_token");
 
   const logoutSubmit = () => {
-    logoutSwal.logouthandle();
+    logoutSwal.logoutHandle();
   };
 
   if (access_token == null) {

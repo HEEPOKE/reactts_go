@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import AuthApiServices from "../../../services/auth/AuthApiService";
 
-const logouthandle = () => {
+const logoutHandle = () => {
   Swal.fire({
     icon: "question",
     title: "Confirm Logout",
@@ -16,6 +16,6 @@ const logouthandle = () => {
   });
 };
 
-const logoutSwal = { logouthandle };
+const logoutSwal = { logoutHandle };
 
 export default logoutSwal;

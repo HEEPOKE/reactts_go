@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import AuthApiServices from "../../services/auth/AuthApiService";
-import TelForm from "../../components/auth/TelForm";
+import TelForm from "../../components/validation/TelForm";
 import ValidateSwal from "../../utils/auth/swal/validateSwal";
 
 export default function RegisterPage() {
@@ -18,7 +18,7 @@ export default function RegisterPage() {
       e.preventDefault();
       e.stopPropagation();
     }
-      setValidated(true);
+    setValidated(true);
   };
 
   const handleSubmit = (e: any) => {

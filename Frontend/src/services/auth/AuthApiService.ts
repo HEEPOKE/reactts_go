@@ -44,7 +44,7 @@ const registerApi = (data: RegisterInterface) => {
 
 const logoutApi = () => {
   return http.get("/logout").then((res: any) => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("access_token");
     window.location.href = "/";
   });
 };

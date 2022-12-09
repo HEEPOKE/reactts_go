@@ -10,7 +10,7 @@ import (
 
 func GetUser(c *gin.Context) {
 	var users []models.User
-	config.DB.Find(&users)
+	config.DB.Order("id").Find(&users)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "ok",
 		"message": "success",

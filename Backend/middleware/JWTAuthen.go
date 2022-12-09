@@ -10,7 +10,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func ValidationUsers() gin.HandlerFunc {
+func JWTAuthentication() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		hmacSampleSecret := []byte(os.Getenv("JWT_SECRET_KEY"))
 		header := c.Request.Header.Get("Authorization")

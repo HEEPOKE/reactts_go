@@ -34,7 +34,7 @@ func Router() {
 		auth.GET("/google-login", GoogleServices.Test)
 	}
 
-	authorized := r.Group("/api/users", middleware.ValidationUsers())
+	authorized := r.Group("/api/users", middleware.JWTAuthentication())
 	{
 		authorized.GET("/get/:id", UserController.GetUserById)
 		authorized.GET("/profile", UserController.Profile)

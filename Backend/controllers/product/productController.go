@@ -12,7 +12,9 @@ func ReadProduct(c *gin.Context) {
 	var product []models.Product
 	config.DB.Order("id").Find(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"data": product,
+		"status":  "ok",
+		"message": "success",
+		"data":    product,
 	})
 }
 

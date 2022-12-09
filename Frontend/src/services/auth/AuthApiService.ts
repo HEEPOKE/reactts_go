@@ -14,7 +14,8 @@ const loginApi = (data: LoginInterface) => {
       const status = res.data["status"];
 
       if (status == "Ok") {
-        localStorage.setItem("user", JSON.stringify(access_token));
+        sessionStorage.setItem("access_token", JSON.stringify(access_token))
+        // localStorage.setItem("user", JSON.stringify(access_token));
         loginSwal.loginSuccess(message);
       }
     })

@@ -38,9 +38,10 @@ func Router() {
 	{
 		authorized.GET("/get/:id", UserController.GetUserById)
 		authorized.GET("/profile", UserController.Profile)
+		authorized.GET("/read", UserController.GetUser)
 	}
 
-	product := r.Group("/api/product")
+	product := r.Group("/api/product", middleware.JWTAuthentication())
 	{
 		product.GET("/read", ProductController.ReadProduct)
 		product.POST("/add", ProductController.AddProduct)
@@ -48,8 +49,6 @@ func Router() {
 		product.PATCH("/update/:id", ProductController.UpdateProduct)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
-
-	r.GET("/api/read/users", UserController.GetUser)
 
 	r.Run("localhost:6476")
 }

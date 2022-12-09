@@ -3,6 +3,7 @@ package auth
 import (
 	"Backend/api/config"
 	"Backend/api/models"
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -59,7 +60,7 @@ func Login(c *gin.Context) {
 	if err := c.ShouldBindJSON(&json); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error":  err.Error(),
-			"status": "Fail",
+			"status": "Error",
 		})
 		return
 	}
@@ -67,7 +68,7 @@ func Login(c *gin.Context) {
 	config.DB.Where("email = ?", json.Email).First(&userExist)
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "Fail",
+			"status":  "Error",
 			"message": "อีเมล์นี้ยังไม่ได้ทำการสมัครสมาชิก",
 		})
 		return
@@ -77,9 +78,10 @@ func Login(c *gin.Context) {
 		hmacSampleSecret = []byte(os.Getenv("JWT_SECRET_KEY"))
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"userId": userExist.ID,
-			"exp":    time.Now().Add(time.Minute * 10).Unix(),
+			"exp":    time.Now().Add(time.Minute * 60).Unix(),
 		})
-		_, tokenString := token.SignedString(hmacSampleSecret)
+		tokenString, err := token.SignedString(hmacSampleSecret)
+		fmt.Println(tokenString, err)
 		c.JSON(http.StatusOK, gin.H{
 			"status":       "Ok",
 			"message":      "Login Success",
@@ -89,7 +91,7 @@ func Login(c *gin.Context) {
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "Fail",
+			"status":  "Error",
 			"message": "Login Failed",
 		})
 		return

@@ -30,7 +30,7 @@ func GetUserById(c *gin.Context) {
 }
 
 func Profile(c *gin.Context) {
-	userId := c.MustGet("userId").(float64)
+	userId := c.MustGet("userId").(uint)
 	var user []models.User
 	config.DB.First(&user, userId)
 	c.JSON(http.StatusOK, gin.H{

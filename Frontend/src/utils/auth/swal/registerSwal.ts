@@ -19,14 +19,6 @@ const registerError = (message: any) => {
   });
 };
 
-const errCase = (err: any) => {
-  Swal.fire({
-    icon: "error",
-    title: "Error",
-    text: err,
-  });
-};
-
-const AuthSwal = { registerSuccess, registerError, errCase };
+const AuthSwal = { registerSuccess, registerError };
 
 export default AuthSwal;

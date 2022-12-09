@@ -7,6 +7,7 @@ const RegisterPage = lazy(() => import("../pages/auth/RegisterPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
 const CreateProductPage = lazy(() => import("../pages/CreateProductPage"));
 const UpdateProductPage = lazy(() => import("../pages/UpdateProductPage"));
+const ProfilePage = lazy(() => import("../pages/ProfilePage"));
 const LoadingPage = lazy(() => import("../pages/LoadingPage"));
 
 export default function AppRouter() {
@@ -20,6 +21,7 @@ export default function AppRouter() {
           <Route path="/product" element={<ProductPage />} />
           <Route path="/create-product" element={<CreateProductPage />} />
           <Route path="/update-product/:id" element={<UpdateProductPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Suspense>
     </Router>

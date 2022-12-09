@@ -69,7 +69,7 @@ func Login(c *gin.Context) {
 	if userExist.ID == 0 {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  "Error",
-			"message": "ยังไม่มีการสมัครสมาชิก",
+			"message": "อีเมล์นี้ยังไม่ได้ทำการสมัครสมาชิก",
 		})
 		return
 	}
@@ -91,7 +91,7 @@ func Login(c *gin.Context) {
 		return
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  "Error",
+			"status":  "Fail",
 			"message": "Login Failed",
 		})
 		return
@@ -101,6 +101,7 @@ func Login(c *gin.Context) {
 func Logout(c *gin.Context) {
 	c.SetCookie("jwt", "", -1, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
+		"status":  "Success",
 		"message": "Logout Success",
 	})
 }

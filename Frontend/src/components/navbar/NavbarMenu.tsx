@@ -1,6 +1,7 @@
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import AuthButton from "../auth/AuthButton";
 
 export default function NavbarMenu() {
   return (
@@ -29,12 +30,7 @@ export default function NavbarMenu() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <LinkContainer to="/auth/login">
-              <Nav.Link>Login</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/auth/register">
-              <Nav.Link>Register</Nav.Link>
-            </LinkContainer>
+            <AuthButton />
           </Nav>
         </Navbar.Collapse>
       </Container>

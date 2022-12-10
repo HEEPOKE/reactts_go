@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Form, Button, Card } from "react-bootstrap";
-import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
-import ProductSwal from "../../utils/product";
 import { useParams } from "react-router-dom";
+import ProductApi from "../../services/ProductServices";
 
 export default function FormUpdate() {
   const [validated, setValidated] = useState(false);
@@ -14,10 +13,11 @@ export default function FormUpdate() {
   const [price, setPrice] = useState("");
 
   const params = useParams();
+  const id = params.id;
 
   useEffect(() => {
     http
-      .get(`/api/product/get/${params.id}`)
+      .get(`/api/product/get/${id}`)
       .then((res: any) => {
         setName(res.data.product[0]["name"]);
         setColor(res.data.product[0]["category"]);
@@ -28,7 +28,7 @@ export default function FormUpdate() {
         // ProductSwal.readErr(err);
         console.log(err);
       });
-  }, [`${params.id}`]);
+  }, [`${id}`]);
 
   const Validation = (e: any) => {
     const form = e.currentTarget;
@@ -52,7 +52,7 @@ export default function FormUpdate() {
       price: newPrice,
     };
 
-    console.log(data);
+    ProductApi.UpdateProduct(id, data);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, NavDropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavLogout from "../auth/NavLogout";
 
 export default function RightMenu() {
@@ -10,7 +11,10 @@ export default function RightMenu() {
       <>
         <NavDropdown title="Profile" id="nav-dropdown" menuVariant="dark">
           <LinkContainer to="/profile">
-            <NavDropdown.Item>Profile</NavDropdown.Item>
+            <NavDropdown.Item>
+              <FontAwesomeIcon icon={["fas", "user"]} className="mx-2" />
+              Profile
+            </NavDropdown.Item>
           </LinkContainer>
           <NavDropdown.Item>Another action</NavDropdown.Item>
           <NavDropdown.Item>Something</NavDropdown.Item>

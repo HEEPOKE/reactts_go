@@ -35,8 +35,8 @@ export default function DataProducts() {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Color</th>
               <th>Category</th>
+              <th>Color</th>
               <th>Price</th>
               <th>Actions</th>
             </tr>
@@ -48,8 +48,8 @@ export default function DataProducts() {
                 <tr key={i}>
                   <td>{num++}</td>
                   <td>{item.name}</td>
-                  <td>{item.color}</td>
                   <td>{item.category}</td>
+                  <td>{item.color}</td>
                   <td>{item.price} bath</td>
                   <td>
                     <LinkContainer to={`/update-product/${item.ID}`}>

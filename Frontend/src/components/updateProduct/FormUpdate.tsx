@@ -13,8 +13,7 @@ export default function FormUpdate() {
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
 
-  const params = useParams();
-  const id = params.id;
+  const { id } = useParams();
 
   useEffect(() => {
     http

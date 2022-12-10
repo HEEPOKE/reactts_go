@@ -1,4 +1,5 @@
 import { NavDropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logoutSwal from "../../utils/auth/swal/logoutSwal";
 
 export default function NavLogout() {
@@ -8,7 +9,13 @@ export default function NavLogout() {
 
   return (
     <>
-      <NavDropdown.Item onClick={logoutSubmit}>Logout</NavDropdown.Item>
+      <NavDropdown.Item onClick={logoutSubmit}>
+        <FontAwesomeIcon
+          icon={["fas", "right-from-bracket"]}
+          className="mx-2"
+        />
+        Logout
+      </NavDropdown.Item>
     </>
   );
 }

@@ -78,7 +78,7 @@ const caseErr = (err: any) => {
   Swal.fire({
     icon: "error",
     title: "Error",
-    text: `Error: ${err}`,
+    text: `${err}`,
     denyButtonText: "OK",
   });
 };

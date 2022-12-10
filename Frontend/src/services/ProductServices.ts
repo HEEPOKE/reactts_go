@@ -24,7 +24,7 @@ const AddProduct = (data: any) => {
 
 const UpdateProduct = ({ id, data }: UpdateProductInterface) => {
   return http
-    .post<ProductInterface>(`/api/product/update/${id}`, data)
+    .put<ProductInterface>(`/api/product/update/${id}`, data)
     .then((res: any) => {
       const status = res.data["status"];
       const message = res.data["message"];

@@ -52,7 +52,7 @@ export default function FormUpdate() {
       price: newPrice,
     };
 
-    ProductApi.UpdateProduct(id, data);
+    ProductApi.UpdateProduct({ id, data });
   };
 
   return (

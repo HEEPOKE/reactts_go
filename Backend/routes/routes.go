@@ -17,8 +17,8 @@ func Router() {
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS"},
-		AllowHeaders:     []string{"Content-Type", "Authorization", "X-Requested-With"},
+		AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS", "PUT"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
@@ -48,7 +48,7 @@ func Router() {
 		product.GET("/read", ProductController.ReadProduct)
 		product.POST("/add", ProductController.AddProduct)
 		product.GET("/get/:id", ProductController.GetProductById)
-		product.PATCH("/update/:id", ProductController.UpdateProduct)
+		product.PUT("/update/:id", ProductController.UpdateProduct)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}
 

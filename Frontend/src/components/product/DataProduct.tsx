@@ -20,7 +20,7 @@ export default function DataProducts() {
       });
   }, []);
 
-  if (product.length > 1) {
+  if (product.length >= 1) {
     return (
       <Container className="mt-2">
         <Table

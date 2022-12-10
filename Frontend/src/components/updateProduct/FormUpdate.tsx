@@ -62,6 +62,7 @@ export default function FormUpdate() {
                 <Form.Label>Name:</Form.Label>
                 <Form.Control
                   type="text"
+                  id="name"
                   onChange={(e: any) => setName(e.target.value)}
                   value={name}
                   required
@@ -74,6 +75,7 @@ export default function FormUpdate() {
                 <Form.Label>Category:</Form.Label>
                 <Form.Control
                   type="text"
+                  id="category"
                   onChange={(e: any) => setCategory(e.target.value)}
                   value={category}
                   required
@@ -86,6 +88,7 @@ export default function FormUpdate() {
                 <Form.Label>Color:</Form.Label>
                 <Form.Control
                   type="text"
+                  id="color"
                   onChange={(e: any) => setColor(e.target.value)}
                   value={color}
                   required
@@ -98,6 +101,7 @@ export default function FormUpdate() {
                 <Form.Label>Price:</Form.Label>
                 <Form.Control
                   type="number"
+                  id="price"
                   min={0}
                   onChange={(e: any) => setPrice(e.target.value)}
                   value={price}

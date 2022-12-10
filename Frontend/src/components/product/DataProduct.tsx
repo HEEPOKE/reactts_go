@@ -13,8 +13,7 @@ export default function DataProducts() {
     http
       .get("/api/product/read")
       .then((res: any) => {
-        setProduct(res.data);
-        console.log(res.data);
+        setProduct(res.data.data);
       })
       .catch((err: any) => {
         ProductSwal.readErr(err);
@@ -44,9 +43,10 @@ export default function DataProducts() {
           </thead>
           <tbody>
             {product.map((item, i) => {
+              var num = i + 1;
               return (
-                <tr key={item.ID}>
-                  <td>{i++}</td>
+                <tr key={i}>
+                  <td>{num++}</td>
                   <td>{item.name}</td>
                   <td>{item.color}</td>
                   <td>{item.category}</td>

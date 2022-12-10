@@ -4,6 +4,7 @@ import { Container, Row, Form, Button, Card } from "react-bootstrap";
 import http from "../../https/http";
 import { useParams } from "react-router-dom";
 import ProductApi from "../../services/ProductServices";
+import ProductSwal from "../../utils/product";
 
 export default function FormUpdate() {
   const [validated, setValidated] = useState(false);
@@ -25,8 +26,7 @@ export default function FormUpdate() {
         setPrice(res.data.product[0]["price"]);
       })
       .catch((err: any) => {
-        // ProductSwal.readErr(err);
-        console.log(err);
+        ProductSwal.readErr(err);
       });
   }, [`${id}`]);
 

@@ -3,6 +3,8 @@ package product
 import (
 	"Backend/api/config"
 	"Backend/api/models"
+	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,7 +14,7 @@ func ReadProduct(c *gin.Context) {
 	var product []models.Product
 	config.DB.Order("id").Find(&product)
 	c.JSON(http.StatusOK, gin.H{
-		"status":  "ok",
+		"status":  "Success",
 		"message": "success",
 		"data":    product,
 	})
@@ -28,7 +30,15 @@ func GetProductById(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, product)
+	_, err := json.Marshal(&product)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "Ok",
+		"product": product,
+	})
 }
 
 func AddProduct(c *gin.Context) {

@@ -19,13 +19,14 @@ export default function FormUpdate() {
     http
       .get(`/api/product/get/${params.id}`)
       .then((res: any) => {
-        setName(res.data.name);
-        setCategory(res.data.category);
-        setColor(res.data.color);
-        setPrice(res.data.price);
+        setName(res.data.product[0]["name"]);
+        setColor(res.data.product[0]["category"]);
+        setCategory(res.data.product[0]["color"]);
+        setPrice(res.data.product[0]["price"]);
       })
       .catch((err: any) => {
-        ProductSwal.readErr(err);
+        // ProductSwal.readErr(err);
+        console.log(err);
       });
   }, [`${params.id}`]);
 
@@ -50,6 +51,8 @@ export default function FormUpdate() {
       color: color,
       price: newPrice,
     };
+
+    console.log(data);
   };
 
   return (

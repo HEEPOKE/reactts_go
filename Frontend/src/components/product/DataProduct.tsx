@@ -16,7 +16,7 @@ export default function DataProducts() {
         setProduct(res.data.data);
       })
       .catch((err: any) => {
-        ProductSwal.readErr(err);
+        // ProductSwal.readErr(err);
       });
   }, []);
 

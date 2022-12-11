@@ -86,6 +86,7 @@ export default function LoadingPage() {
                 className="btn-lg mt-2 col-12"
                 variant="primary"
                 onClick={handleSubmit}
+                type="submit"
               >
                 Login
               </Button>

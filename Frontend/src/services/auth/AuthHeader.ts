@@ -1,4 +1,4 @@
-const authHeader = () => {
+export default function authHeader() {
   const userStr = sessionStorage.getItem("user");
   let user = null;
   if (userStr) user = JSON.parse(userStr);
@@ -8,8 +8,8 @@ const authHeader = () => {
   } else {
     return { Authorization: "" };
   }
-};
+}
 
-const AuthHeader = { authHeader };
+// const AuthHeader = { authHeader };
 
-export default AuthHeader;
+// export default AuthHeader;

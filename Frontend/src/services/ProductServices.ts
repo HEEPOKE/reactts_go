@@ -1,11 +1,12 @@
 import http from "../https/http";
+import authHeader from "./auth/AuthHeader";
 import ProductSwal from "../utils/product";
 import ProductInterface from "../interfaces/ProductInterface";
 import UpdateProductInterface from "../interfaces/UpdateProductInterface";
 
 const AddProduct = (data: any) => {
   return http
-    .post<ProductInterface>("/api/product/add", data)
+    .post<ProductInterface>("/api/product/add", data, { headers: authHeader() })
     .then((res: any) => {
       const status = res.data["status"];
       const message = res.data["message"];

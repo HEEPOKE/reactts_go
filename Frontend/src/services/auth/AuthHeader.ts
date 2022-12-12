@@ -1,5 +1,5 @@
 const authHeader = () => {
-  const userStr = localStorage.getItem("user");
+  const userStr = sessionStorage.getItem("user");
   let user = null;
   if (userStr) user = JSON.parse(userStr);
 

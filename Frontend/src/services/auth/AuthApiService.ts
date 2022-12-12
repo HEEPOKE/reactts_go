@@ -50,10 +50,18 @@ const logoutApi = () => {
   });
 };
 
+const getCurrentUser = () => {
+  const userStr = sessionStorage.getItem("user");
+  if (userStr) return JSON.parse(userStr);
+
+  return null;
+};
+
 const AuthApiServices = {
   loginApi,
   registerApi,
   logoutApi,
+  getCurrentUser,
 };
 
 export default AuthApiServices;

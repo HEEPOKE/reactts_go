@@ -10,11 +10,18 @@ import (
 	"time"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
+var session_id = os.Getenv("SESSION_ID")
+
 func Router() {
 	r := gin.Default()
+	var store = cookie.NewStore([]byte(session_id))
+	r.Use(sessions.Sessions("mysession", store))
+
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS", "PUT"},
@@ -37,7 +44,7 @@ func Router() {
 			auth.GET("/logout", AuthController.Logout)
 			auth.GET("/google-login", GoogleServices.Test)
 		}
-		r.POST("/api/auth//login", AuthController.Login)
+		r.POST("/api/auth/login", AuthController.Login)
 	}
 
 	authorized := r.Group("/api/users", middleware.SetSession())

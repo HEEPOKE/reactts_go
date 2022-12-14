@@ -2,6 +2,7 @@ package auth
 
 import (
 	"Backend/api/config"
+	session "Backend/api/middleware"
 	"Backend/api/models"
 	"fmt"
 	"net/http"
@@ -81,12 +82,14 @@ func Login(c *gin.Context) {
 			"exp":    time.Now().Add(time.Minute * 60).Unix(),
 		})
 		tokenString, err := token.SignedString(hmacSampleSecret)
+		session.SaveSession(c, userExist.ID)
 		fmt.Println(tokenString, err)
 		c.JSON(http.StatusOK, gin.H{
 			"status":       "Ok",
 			"message":      "Login Success",
 			"user_id":      userExist.ID,
 			"access_token": tokenString,
+			"Session":      session.GetSession(c),
 		})
 		return
 	} else {

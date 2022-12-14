@@ -30,3 +30,31 @@ func AuthSession() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func SaveSession(c *gin.Context, userId uint) {
+	session := sessions.Default(c)
+	session.Set(session_id, userId)
+	session.Save()
+}
+
+func ClearSession(c *gin.Context) {
+	session := sessions.Default(c)
+	session.Clear()
+	session.Save()
+}
+
+func GetSession(c *gin.Context) uint {
+	session := sessions.Default(c)
+	sessionID := session.Get(session_id)
+	if sessionID == nil {
+		return 0
+	}
+	return sessionID.(uint)
+}
+
+// Check Session for User
+func CheckSession(c *gin.Context) bool {
+	session := sessions.Default(c)
+	sessionID := session.Get(session_id)
+	return sessionID != nil
+}

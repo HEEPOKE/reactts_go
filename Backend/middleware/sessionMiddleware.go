@@ -2,21 +2,31 @@ package middleware
 
 import (
 	"net/http"
+	"os"
 
-	"github.com/gorilla/sessions"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-gonic/gin"
 )
 
-var store = sessions.NewCookieStore([]byte("super-secret"))
+var session_id = os.Getenv("SESSION_ID")
 
-func CheckAuth(HandlerFunc http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		session, _ := store.Get(r, "session")
-		_, ok := session.Values["userId"]
-		if !ok {
-			http.Redirect(w, r, "/login", 302)
+func SetSession() gin.HandlerFunc {
+	store := cookie.NewStore([]byte(session_id))
+	return sessions.Sessions("mysession", store)
+}
+
+func AuthSession() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		sessionID := session.Get(session_id)
+		if sessionID == nil {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"status":  "Fail",
+				"message": "กรุณาเข้าสู่ระบบ",
+			})
 			return
 		}
-
-		HandlerFunc.ServeHTTP(w, r)
+		c.Next()
 	}
 }

@@ -28,28 +28,38 @@ func Router() {
 	}))
 	// r.Use(cors.Default())
 
-	auth := r.Group("/api/auth")
+	r.POST("/api/auth//login", AuthController.Login)
+	r.POST("/api/auth/register", AuthController.Register)
+
+	auth := r.Group("/api/auth", middleware.SetSession())
 	{
-		auth.POST("/login", AuthController.Login)
-		auth.POST("/register", AuthController.Register)
-		auth.GET("/logout", AuthController.Logout)
-		auth.GET("/google-login", GoogleServices.Test)
+		auth.Use(middleware.AuthSession())
+		{
+			auth.GET("/logout", AuthController.Logout)
+			auth.GET("/google-login", GoogleServices.Test)
+		}
 	}
 
-	authorized := r.Group("/api/users", middleware.JWTAuthentication())
+	authorized := r.Group("/api/users", middleware.SetSession())
 	{
-		authorized.GET("/get/:id", UserController.GetUserById)
-		authorized.GET("/profile", UserController.Profile)
-		authorized.GET("/read", UserController.GetUser)
+		authorized.Use(middleware.JWTAuthentication())
+		{
+			authorized.GET("/get/:id", UserController.GetUserById)
+			authorized.GET("/profile", UserController.Profile)
+			authorized.GET("/read", UserController.GetUser)
+		}
 	}
 
-	product := r.Group("/api/product", middleware.JWTAuthentication())
+	product := r.Group("/api/product", middleware.SetSession())
 	{
-		product.GET("/read", ProductController.ReadProduct)
-		product.POST("/add", ProductController.AddProduct)
-		product.GET("/get/:id", ProductController.GetProductById)
-		product.PUT("/update/:id", ProductController.UpdateProduct)
-		product.DELETE("/delete/:id", ProductController.Delete)
+		product.Use(middleware.JWTAuthentication())
+		{
+			product.GET("/read", ProductController.ReadProduct)
+			product.POST("/add", ProductController.AddProduct)
+			product.GET("/get/:id", ProductController.GetProductById)
+			product.PUT("/update/:id", ProductController.UpdateProduct)
+			product.DELETE("/delete/:id", ProductController.Delete)
+		}
 	}
 
 	r.Run("localhost:6476")

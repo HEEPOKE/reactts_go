@@ -103,8 +103,15 @@ func Login(c *gin.Context) {
 
 func Logout(c *gin.Context) {
 	c.SetCookie("jwt", "", -1, "", "", false, true)
+	session.ClearSession(c)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "Success",
 		"message": "Logout Success",
+	})
+}
+
+func GetSession(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": session.GetSession(c),
 	})
 }

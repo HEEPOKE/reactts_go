@@ -7,9 +7,11 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	gsessions "github.com/gorilla/sessions"
 )
 
 var session_id = os.Getenv("SESSION_ID")
+var store = gsessions.NewCookieStore([]byte(session_id))
 
 func SetSession() gin.HandlerFunc {
 	store := cookie.NewStore([]byte(session_id))
@@ -28,6 +30,7 @@ func AuthSession() gin.HandlerFunc {
 			return
 		}
 		c.Next()
+
 	}
 }
 

@@ -52,7 +52,6 @@ func GetSession(c *gin.Context) uint {
 	return sessionID.(uint)
 }
 
-// Check Session for User
 func CheckSession(c *gin.Context) bool {
 	session := sessions.Default(c)
 	sessionID := session.Get(session_id)

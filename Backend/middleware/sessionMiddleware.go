@@ -31,6 +31,19 @@ func AuthSession() gin.HandlerFunc {
 	}
 }
 
+func AuthRequired() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		u := session.Get(session_id)
+		if u == nil {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			c.Abort()
+			return
+		}
+		c.Next()
+	}
+}
+
 func SaveSession(c *gin.Context, userId uint) {
 	session := sessions.Default(c)
 	session.Set(session_id, userId)

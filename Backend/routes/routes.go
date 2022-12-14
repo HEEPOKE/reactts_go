@@ -28,7 +28,6 @@ func Router() {
 	}))
 	// r.Use(cors.Default())
 
-	r.POST("/api/auth//login", AuthController.Login)
 	r.POST("/api/auth/register", AuthController.Register)
 
 	auth := r.Group("/api/auth", middleware.SetSession())
@@ -38,11 +37,12 @@ func Router() {
 			auth.GET("/logout", AuthController.Logout)
 			auth.GET("/google-login", GoogleServices.Test)
 		}
+		r.POST("/api/auth//login", AuthController.Login)
 	}
 
 	authorized := r.Group("/api/users", middleware.SetSession())
 	{
-		authorized.Use(middleware.JWTAuthentication())
+		authorized.Use(middleware.JWTAuthentication(), middleware.AuthRequired())
 		{
 			authorized.GET("/get/:id", UserController.GetUserById)
 			authorized.GET("/profile", UserController.Profile)
@@ -52,7 +52,7 @@ func Router() {
 
 	product := r.Group("/api/product", middleware.SetSession())
 	{
-		product.Use(middleware.JWTAuthentication())
+		product.Use(middleware.JWTAuthentication(), middleware.AuthRequired())
 		{
 			product.GET("/read", ProductController.ReadProduct)
 			product.POST("/add", ProductController.AddProduct)

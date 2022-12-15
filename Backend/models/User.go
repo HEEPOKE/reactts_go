@@ -1,6 +1,8 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -11,4 +13,6 @@ type User struct {
 	Tel          string `json:"tel"`
 	Role         int    `json:"role"`
 	RefreshToken string `json:"refresh_token"`
+	// IssuedAt     time.Time `json:"issued_at"`
+	// ExpiredAt    time.Time `json:"expired_at"`
 }

@@ -19,8 +19,8 @@ var session_id = os.Getenv("SESSION_ID")
 
 func Router() {
 	r := gin.Default()
-	// var store = cookie.NewStore([]byte(session_id))
-	r.Use(sessions.Sessions("session", cookie.NewStore([]byte(session_id))))
+	var store = cookie.NewStore([]byte(session_id))
+	r.Use(sessions.Sessions("session", store))
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},

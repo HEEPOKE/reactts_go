@@ -5,10 +5,12 @@ import (
 	session "Backend/api/middleware"
 	"Backend/api/models"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"time"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
@@ -103,7 +105,19 @@ func Login(c *gin.Context) {
 
 func Logout(c *gin.Context) {
 	c.SetCookie("jwt", "", -1, "", "", false, true)
-	session.ClearSession(c)
+	session := sessions.Default(c)
+	session.Clear()
+	user := session.Get(os.Getenv("SESSION_ID"))
+	log.Println("logging out user:", user)
+	if user == nil {
+		log.Println("Invalid session token")
+		return
+	}
+	session.Delete(os.Getenv("SESSION_ID"))
+	if err := session.Save(); err != nil {
+		log.Println("Failed to save session:", err)
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "Success",
 		"message": "Logout Success",

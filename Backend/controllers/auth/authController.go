@@ -85,7 +85,8 @@ func Login(c *gin.Context) {
 			"role":     userExist.Role,
 			"exp":      expire,
 		})
-		_, tokenString := token.SignedString(hmacSampleSecret)
+		tokenString, err := token.SignedString(hmacSampleSecret)
+		fmt.Println(tokenString, err)
 		c.JSON(http.StatusOK, gin.H{
 			"status":       "Ok",
 			"message":      "Login Success",
@@ -104,7 +105,11 @@ func Login(c *gin.Context) {
 
 func Logout(c *gin.Context) {
 	authHeader := c.Request.Header.Get("Authorization")
-	fmt.Println("Authorization header:", authHeader)
+	fmt.Println("auth: ", authHeader)
+	if authHeader == "" {
+		c.AbortWithStatus(401)
+		return
+	}
 	// c.SetCookie("jwt", "", -1, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "Success",

@@ -1,10 +1,7 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Navigate, Outlet } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import GoogleLoginButton from "../../features/GoogleLoginButton";
-import IConditionalRoute from "../../interfaces/ResponseInterface";
-import AuthService from "../../services/auth/AuthService";
 import AuthApiServices from "../../services/auth/AuthApiService";
 
 export default function LoadingPage() {

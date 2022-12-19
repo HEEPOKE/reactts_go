@@ -10,17 +10,11 @@ import (
 	"time"
 
 	"github.com/gin-contrib/cors"
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 )
 
-var session_id = os.Getenv("SESSION_ID")
-
 func Router() {
 	r := gin.Default()
-	var store = cookie.NewStore([]byte(session_id))
-	r.Use(sessions.Sessions("session", store))
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},

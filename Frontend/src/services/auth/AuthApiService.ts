@@ -1,6 +1,7 @@
 import http from "../../https/http";
 import LoginInterface from "../../interfaces/auth/LoginInterface";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
+import TokenInterface from "../../interfaces/auth/TokenInterface";
 import AuthSwal from "../../utils/auth/swal/registerSwal";
 import loginSwal from "../../utils/auth/swal/loginSwal";
 import errSwal from "../../utils/auth/errorAuth";
@@ -42,26 +43,19 @@ const registerApi = (data: RegisterInterface) => {
     });
 };
 
-const logoutApi = () => {
-  return http.get("api/auth/logout").then((res: any) => {
-    // sessionStorage.removeItem("access_token");
-    sessionStorage.clear();
-    window.location.href = "/";
-  });
-};
-
-const getCurrentUser = () => {
-  const userStr = sessionStorage.getItem("user");
-  if (userStr) return JSON.parse(userStr);
-
-  return null;
+const logoutApi = (token: TokenInterface) => {
+  return http
+    .post<TokenInterface>("api/auth/logout", token)
+    .then((res: any) => {
+      sessionStorage.clear();
+      window.location.href = "/";
+    });
 };
 
 const AuthApiServices = {
   loginApi,
   registerApi,
   logoutApi,
-  getCurrentUser,
 };
 
 export default AuthApiServices;

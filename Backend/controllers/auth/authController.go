@@ -90,9 +90,8 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status":       "Ok",
 			"message":      "Login Success",
-			"user_id":      userExist.ID,
 			"access_token": tokenString,
-			"exp":          "",
+			"exp":          expire,
 		})
 		return
 	} else {

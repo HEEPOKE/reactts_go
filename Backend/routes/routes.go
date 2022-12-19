@@ -5,7 +5,6 @@ import (
 	ProductController "Backend/api/controllers/product"
 	UserController "Backend/api/controllers/user"
 	"Backend/api/middleware"
-	GoogleServices "Backend/api/services/auth"
 	"os"
 	"time"
 
@@ -19,7 +18,7 @@ func Router() {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"DELETE", "POST", "GET", "OPTIONS", "PUT"},
-		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowHeaders:     []string{"Content-Type", "Origin", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
@@ -34,7 +33,7 @@ func Router() {
 		auth.POST("/register", AuthController.Register)
 		auth.POST("/login", AuthController.Login)
 		auth.GET("/logout", AuthController.Logout)
-		auth.GET("/google-login", GoogleServices.Test)
+		// auth.GET("/google-login", GoogleServices.Test)
 	}
 
 	authorized := r.Group("/api/users", middleware.JWTAuthentication())

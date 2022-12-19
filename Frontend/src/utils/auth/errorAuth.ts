@@ -8,6 +8,7 @@ const errorAuth = (err: any) => {
 };
 
 const errCase = (err: any) => {
+
   Swal.fire({
     icon: "error",
     title: "Error",

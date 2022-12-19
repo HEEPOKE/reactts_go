@@ -1,8 +1,7 @@
 import Swal from "sweetalert2";
-import TokenInterface from "../../../interfaces/auth/TokenInterface";
 import AuthApiServices from "../../../services/auth/AuthApiService";
 
-const logoutHandle = (token : TokenInterface) => {
+const logoutHandle = () => {
   Swal.fire({
     icon: "question",
     title: "Confirm Logout",
@@ -12,7 +11,7 @@ const logoutHandle = (token : TokenInterface) => {
     showCancelButton: true,
   }).then((res: any) => {
     if (res.isDenied) {
-      AuthApiServices.logoutApi(token);
+      AuthApiServices.logoutApi();
     }
   });
 };

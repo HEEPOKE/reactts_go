@@ -1,15 +1,9 @@
 export default function authHeader() {
-  const userStr = sessionStorage.getItem("user");
-  let user = null;
-  if (userStr) user = JSON.parse(userStr);
+  const access_token = sessionStorage.getItem("access_token") ?? false;
 
-  if (user && user.accessToken) {
-    return { Authorization: "Bearer " + user.accessToken };
+  if (!access_token) {
+    return { Authorization: "Bearer " + access_token };
   } else {
     return { Authorization: "" };
   }
 }
-
-// const AuthHeader = { authHeader };
-
-// export default AuthHeader;

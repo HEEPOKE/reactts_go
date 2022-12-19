@@ -1,10 +1,10 @@
 import http from "../../https/http";
 import LoginInterface from "../../interfaces/auth/LoginInterface";
 import RegisterInterface from "../../interfaces/auth/RegisterInterFace";
-import TokenInterface from "../../interfaces/auth/TokenInterface";
 import AuthSwal from "../../utils/auth/swal/registerSwal";
 import loginSwal from "../../utils/auth/swal/loginSwal";
 import errSwal from "../../utils/auth/errorAuth";
+import authHeader from "./AuthHeader";
 
 const loginApi = (data: LoginInterface) => {
   return http
@@ -16,7 +16,6 @@ const loginApi = (data: LoginInterface) => {
 
       if (status == "Ok") {
         sessionStorage.setItem("access_token", access_token);
-        // localStorage.setItem("user", JSON.stringify(access_token));
         loginSwal.loginSuccess(message);
       }
     })
@@ -43,9 +42,9 @@ const registerApi = (data: RegisterInterface) => {
     });
 };
 
-const logoutApi = (token: TokenInterface) => {
+const logoutApi = () => {
   return http
-    .post<TokenInterface>("api/auth/logout", token)
+    .get("api/auth/logout", { headers: authHeader() })
     .then((res: any) => {
       sessionStorage.clear();
       window.location.href = "/";

@@ -25,7 +25,7 @@ const AddProduct = (data: any) => {
 
 const UpdateProduct = ({ id, data }: UpdateProductInterface) => {
   return http
-    .put<ProductInterface>(`/api/product/update/${id}`, data)
+    .put<ProductInterface>(`/api/product/update/${id}`, data, { headers: authHeader() })
     .then((res: any) => {
       const status = res.data["status"];
       const message = res.data["message"];
@@ -44,7 +44,7 @@ const UpdateProduct = ({ id, data }: UpdateProductInterface) => {
 
 const DeleteProduct = (id: any) => {
   return http
-    .delete(`/api/product/delete/${id}`)
+    .delete(`/api/product/delete/${id}`, { headers: authHeader() })
     .then((res: any) => {
       const status = res.data["status"];
       const message = res.data["message"];

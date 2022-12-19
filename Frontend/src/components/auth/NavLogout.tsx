@@ -4,8 +4,7 @@ import logoutSwal from "../../utils/auth/swal/logoutSwal";
 
 export default function NavLogout() {
   const logoutSubmit = () => {
-
-    // logoutSwal.logoutHandle(token);
+    logoutSwal.logoutHandle();
   };
 
   return (

@@ -25,6 +25,9 @@ func JWTAuthentication() gin.HandlerFunc {
 			c.Set("userId", claims["userId"])
 			c.Set("username", claims["username"])
 			c.Set("email", claims["email"])
+			c.Set("tel", claims["tel"])
+			c.Set("role", claims["role"])
+			c.Set("exp", claims["exp"])
 		} else {
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{
 				"status":  "forbidden",

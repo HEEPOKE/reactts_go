@@ -2,7 +2,6 @@ package auth
 
 import (
 	"Backend/api/config"
-	session "Backend/api/middleware"
 	"Backend/api/models"
 	"fmt"
 	"net/http"
@@ -77,19 +76,23 @@ func Login(c *gin.Context) {
 	err := bcrypt.CompareHashAndPassword([]byte(userExist.Password), []byte(json.Password))
 	if err == nil {
 		hmacSampleSecret = []byte(os.Getenv("JWT_SECRET_KEY"))
+		expire := time.Now().Add(time.Minute * 60).Unix()
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-			"userId": userExist.ID,
-			"exp":    time.Now().Add(time.Minute * 60).Unix(),
+			"userId":   userExist.ID,
+			"username": userExist.Username,
+			"email":    userExist.Email,
+			"tel":      userExist.Tel,
+			"role":     userExist.Role,
+			"exp":      expire,
 		})
 		tokenString, err := token.SignedString(hmacSampleSecret)
-		session.SaveSession(c, userExist.ID)
 		fmt.Println(tokenString, err)
 		c.JSON(http.StatusOK, gin.H{
 			"status":       "Ok",
 			"message":      "Login Success",
 			"user_id":      userExist.ID,
 			"access_token": tokenString,
-			"Session":      session.GetSession(c),
+			"exp":          "",
 		})
 		return
 	} else {

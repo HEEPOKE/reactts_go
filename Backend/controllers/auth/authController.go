@@ -123,9 +123,3 @@ func Logout(c *gin.Context) {
 		"message": "Logout Success",
 	})
 }
-
-func GetSession(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": session.GetSession(c),
-	})
-}

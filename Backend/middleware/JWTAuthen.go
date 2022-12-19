@@ -23,6 +23,8 @@ func JWTAuthentication() gin.HandlerFunc {
 		})
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			c.Set("userId", claims["userId"])
+			c.Set("username", claims["username"])
+			c.Set("email", claims["email"])
 		} else {
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{
 				"status":  "forbidden",

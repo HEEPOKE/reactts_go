@@ -109,4 +109,5 @@ func Logout(c *gin.Context) {
 		"status":  "Success",
 		"message": "Logout Success",
 	})
+	c.Redirect(http.StatusFound, os.Getenv("ENDPOINT_URL")+"/auth/login")
 }

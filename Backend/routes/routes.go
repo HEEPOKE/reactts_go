@@ -35,13 +35,12 @@ func Router() {
 	}))
 	// r.Use(cors.Default())
 
-	r.POST("/api/auth/register", AuthController.Register)
-
-	auth := r.Group("/api/auth", middleware.JWTAuthentication())
+	auth := r.Group("/api/auth")
 	{
+		auth.POST("/register", AuthController.Register)
+		auth.POST("/login", AuthController.Login)
 		auth.GET("/logout", AuthController.Logout)
 		auth.GET("/google-login", GoogleServices.Test)
-		auth.POST("/api/auth/login", AuthController.Login)
 	}
 
 	authorized := r.Group("/api/users", middleware.JWTAuthentication())

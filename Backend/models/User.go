@@ -12,6 +12,7 @@ type User struct {
 	Email        string `json:"email"`
 	Tel          string `json:"tel"`
 	Role         int    `json:"role"`
+	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	// IssuedAt     time.Time `json:"issued_at"`
 	// ExpiredAt    time.Time `json:"expired_at"`

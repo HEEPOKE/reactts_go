@@ -46,8 +46,8 @@ func Router() {
 	product := r.Group("/api/product", middleware.JWTAuthentication())
 	{
 		product.GET("/read", ProductController.ReadProduct)
-		product.POST("/add", ProductController.AddProduct)
 		product.GET("/get/:id", ProductController.GetProductById)
+		product.POST("/add", ProductController.AddProduct)
 		product.PUT("/update/:id", ProductController.UpdateProduct)
 		product.DELETE("/delete/:id", ProductController.Delete)
 	}

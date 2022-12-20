@@ -3,6 +3,7 @@ package auth
 import (
 	"Backend/api/config"
 	"Backend/api/models"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -107,9 +108,18 @@ func Logout(c *gin.Context) {
 	bearerToken := c.Request.Header.Get("Authorization")
 	fmt.Println("auth: ", bearerToken)
 	if bearerToken == "" {
-		c.AbortWithStatus(401)
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		return
+
+	}
+	_, err := jwt.Parse(bearerToken, func(token *jwt.Token) (interface{}, error) {
+		return nil, errors.New("Token is invalid")
+	})
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"message": "Successfully logged out"})
 		return
 	}
+	c.JSON(http.StatusInternalServerError, gin.H{"error": "Error logging out"})
 	// c.SetCookie("jwt", "", -1, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "Success",

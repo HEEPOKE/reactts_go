@@ -5,13 +5,14 @@ import { LinkContainer } from "react-router-bootstrap";
 import ProductInterface from "../../interfaces/ProductInterface";
 import http from "../../https/http";
 import ProductSwal from "../../utils/product";
+import authHeader from "../../services/auth/AuthHeader";
 
 export default function DataProducts() {
   const [product, setProduct] = useState<ProductInterface[]>([]);
 
   useEffect(() => {
     http
-      .get("/api/product/read")
+      .get("/api/product/read", { headers: authHeader() })
       .then((res: any) => {
         setProduct(res.data.data);
       })

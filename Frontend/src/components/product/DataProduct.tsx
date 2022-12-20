@@ -15,9 +15,10 @@ export default function DataProducts() {
       .get("/api/product/read", { headers: authHeader() })
       .then((res: any) => {
         setProduct(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((err: any) => {
-        console.log(err);
+        ProductSwal.caseErr(err);
       });
   }, []);
 

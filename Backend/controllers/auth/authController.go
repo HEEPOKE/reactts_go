@@ -112,7 +112,7 @@ func Logout(c *gin.Context) {
 		})
 		return
 	}
-	c.SetCookie("jwt", "", -1, "/", "", false, true)
+	c.SetCookie("jwt", "", -1, "", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  "Success",
 		"message": "Logout Success",

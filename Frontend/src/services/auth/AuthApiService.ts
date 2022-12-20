@@ -47,7 +47,7 @@ const logoutApi = () => {
     .get("api/auth/logout", { headers: authHeader() })
     .then((res: any) => {
       // sessionStorage.clear();
-      window.location.href = "/";
+      // window.location.href = "/";
     });
 };
 

@@ -30,7 +30,7 @@ func JWTAuthentication() gin.HandlerFunc {
 			c.Set("exp", claims["exp"])
 		} else {
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{
-				"status":  "forbidden",
+				"status":  "Fail",
 				"message": err.Error(),
 			})
 		}

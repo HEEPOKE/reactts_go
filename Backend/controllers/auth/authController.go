@@ -104,9 +104,9 @@ func Login(c *gin.Context) {
 }
 
 func Logout(c *gin.Context) {
-	authHeader := c.Request.Header.Get("Authorization")
-	fmt.Println("auth: ", authHeader)
-	if authHeader == "" {
+	bearerToken := c.Request.Header.Get("Authorization")
+	fmt.Println("auth: ", bearerToken)
+	if bearerToken == "" {
 		c.AbortWithStatus(401)
 		return
 	}
